@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rafael\\Documents\\Aulas\\Ano 2\\Semestre 1\\Linguagens Prog II\\RECURSO\\repo\\lp2_rec_ghosts\\lp2_rec_ghosts.csproj",
+      "projectUniqueName": "c:\\Users\\Rafael\\Documents\\Aulas\\Ano2\\Semestre1\\Linguagens_Prog_II\\RECURSO\\project\\lp2_rec_ghosts\\lp2_rec_ghosts.csproj",
       "projectName": "lp2_rec_ghosts",
-      "projectPath": "C:\\Users\\Rafael\\Documents\\Aulas\\Ano 2\\Semestre 1\\Linguagens Prog II\\RECURSO\\repo\\lp2_rec_ghosts\\lp2_rec_ghosts.csproj",
+      "projectPath": "c:\\Users\\Rafael\\Documents\\Aulas\\Ano2\\Semestre1\\Linguagens_Prog_II\\RECURSO\\project\\lp2_rec_ghosts\\lp2_rec_ghosts.csproj",
       "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rafael\\Documents\\Aulas\\Ano 2\\Semestre 1\\Linguagens Prog II\\RECURSO\\repo\\lp2_rec_ghosts\\obj\\",
+      "outputPath": "c:\\Users\\Rafael\\Documents\\Aulas\\Ano2\\Semestre1\\Linguagens_Prog_II\\RECURSO\\project\\lp2_rec_ghosts\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
