@@ -40,6 +40,10 @@ Projeto de 2º Época de Linguagens de Programação II
   * Quando o `Ghost` selecionado estiver num `Mirror`, ativa o modo _input_ `_DROP_`.
 
 * `Game Board`
-  * Programaticamente feito de 2 `Dictionary<Position[], BoardObject>`
+  * Programaticamente feito de 2 `Dictionary<Position[], BoardObject[,,]>`
     * Um será o inicial com tudo _default_ sem `Ghosts`.
     * O outro será onde o estado do jogo é atualizado cada _turn_.
+    * No array tri-dimensional de `BoardObjects`
+      * A primeira dimensão são as carpetes e espelhos.
+      * A segunda dimensão onde se movimentam os fantasmas.
+      * A terceira onde residem os fantasmas _dummy_ para os portais. 
