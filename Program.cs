@@ -6,7 +6,7 @@ namespace lp2_rec_ghosts
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
