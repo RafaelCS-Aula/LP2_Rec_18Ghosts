@@ -1,3 +1,5 @@
+using System;
+
 namespace lp2_rec_ghosts.Model
 {
     /// <summary>
@@ -8,6 +10,7 @@ namespace lp2_rec_ghosts.Model
         RED,
         YELLOW,
         BLUE,
-        MIRROR
+        MIRROR,
+        BLOCK
     }
 }

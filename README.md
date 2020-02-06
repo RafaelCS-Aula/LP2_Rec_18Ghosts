@@ -27,6 +27,7 @@ Projeto de 2º Época de Linguagens de Programação II
     * _YELLOW_
     * _BLUE_
     * _MIRROR_
+    * _BLOCK_
   * `Position` é um `struct` com 2 propriedades `X` e `Y`.
   
 * **`Portals`**
