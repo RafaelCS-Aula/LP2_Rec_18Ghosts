@@ -91,11 +91,11 @@ namespace lp2_rec_ghosts.Model
             Board.Add(new Vector(1,4), new BoardObject[3]
                 {new CarpetTile(Colors.YELLOW), null, null});
             Board.Add(new Vector(2,4), new BoardObject[3]
-                {new CarpetTile(Colors.MIRROR), null, null});
+                {new MirrorTile(), null, null});
             Board.Add(new Vector(3,4), new BoardObject[3]
                 {new CarpetTile(Colors.YELLOW), null, null});
             Board.Add(new Vector(4,4), new BoardObject[3]
-                {new CarpetTile(Colors.MIRROR), null, null});
+                {new MirrorTile(), null, null});
             Board.Add(new Vector(5,4), new BoardObject[3]
                 {new CarpetTile(Colors.YELLOW), null, null});
 
@@ -113,11 +113,11 @@ namespace lp2_rec_ghosts.Model
             Board.Add(new Vector(1,2), new BoardObject[3]
                 {new CarpetTile(Colors.BLUE), null, null});
             Board.Add(new Vector(2,2), new BoardObject[3]
-                {new CarpetTile(Colors.MIRROR), null, null});
+                {new MirrorTile(), null, null});
             Board.Add(new Vector(3,2), new BoardObject[3]
                 {new CarpetTile(Colors.YELLOW), null, null});
             Board.Add(new Vector(4,2), new BoardObject[3]
-                {new CarpetTile(Colors.MIRROR), null, null});
+                {new MirrorTile(), null, null});
             Board.Add(new Vector(5,2), new BoardObject[3]
                 {new CarpetTile(Colors.RED), null, null});
 
