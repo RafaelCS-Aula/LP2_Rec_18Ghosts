@@ -75,5 +75,3 @@ O resto é dependente da plataforma em que correr.
       4. Fantasma escapou.
 9. _Render_ do jogo no estado atualizado
 10. **Mudar a vez do Jogador.**
-
-
