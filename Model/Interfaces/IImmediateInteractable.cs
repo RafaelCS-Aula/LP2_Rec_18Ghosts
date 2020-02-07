@@ -1,6 +1,6 @@
 namespace lp2_rec_ghosts.Model.Interfaces
 {
-    public interface IImmediateInteractle
+    public interface IImmediateInteractable
     {
         public void OnImmediateInteraction();
     }
