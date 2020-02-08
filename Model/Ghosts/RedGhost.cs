@@ -5,7 +5,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
         protected override Colors BeatColor {get; set;} = Colors.BLUE;
         protected override Colors LoseToColor {get; set;} = Colors.YELLOW;
 
-        public RedGhost(Vector position, Player owner):base(position, owner) =>
+        public RedGhost(Player owner):base(owner) =>
             MyColor = Colors.RED; 
 
 

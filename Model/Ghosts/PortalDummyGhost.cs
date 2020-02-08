@@ -10,9 +10,8 @@ namespace lp2_rec_ghosts.Model.Ghosts
         protected override Colors LoseToColor {get; set;} = 
             Colors.RED | Colors.BLUE | Colors.YELLOW;
 
-        public PortalDummyGhost(Vector position,Colors myColor, 
-        Player owner = null):
-            base(position, owner)
+        public PortalDummyGhost(Colors myColor, Player owner = null):
+            base(owner)
             {
                 MyColor = myColor;
                 BeatColor = MyColor;

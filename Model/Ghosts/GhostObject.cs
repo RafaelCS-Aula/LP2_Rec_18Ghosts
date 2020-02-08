@@ -13,9 +13,8 @@ namespace lp2_rec_ghosts.Model.Ghosts
         
         protected Player Owner {get; set;}
 
-        public GhostObject(Vector position, Player owner)
+        public GhostObject(Player owner)
         {
-            this.Position = position;
             this.Owner = owner;
         }
 
