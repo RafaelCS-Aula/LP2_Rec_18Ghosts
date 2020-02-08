@@ -2,9 +2,9 @@ using lp2_rec_ghosts.Model.Interfaces;
 
 namespace lp2_rec_ghosts.Model
 {
-    public class MirrorTile : BoardObject, ISelectionInteractable
+    public class MirrorTile : CarpetTile, ISelectionInteractable
     {
-        public MirrorTile() => Color = Colors.MIRROR;
+        public MirrorTile() => MyColor = Colors.MIRROR;
 
         public void OnSelectedInteraction()
         {

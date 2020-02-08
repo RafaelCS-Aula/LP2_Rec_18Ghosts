@@ -1,19 +1,27 @@
+using lp2_rec_ghosts.Model.Interfaces;
+
 namespace lp2_rec_ghosts.Model
 {
-    public class CarpetTile : BoardObject
+    public class CarpetTile : IBoardObject
     {
+
+        public Colors MyColor {get; set;} 
+        public Vector Position {get; set;}
+        
         public CarpetTile(Colors color)
         {
 
-            this.Color = color;
+            MyColor = color;
 
         }
         public CarpetTile(Colors color, Vector vec)
         {
 
-            this.Color = color;
+            MyColor = color;
             this.Position = vec;
 
         }
+
+        public CarpetTile(){}
     }
 }
