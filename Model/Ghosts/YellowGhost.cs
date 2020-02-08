@@ -1,5 +1,8 @@
 namespace lp2_rec_ghosts.Model.Ghosts
 {
+    /// <summary>
+    /// Yellow Ghosts, they lose to Blues and Beat Reds.
+    /// </summary>
     public class YellowGhost : GhostObject
     {
 

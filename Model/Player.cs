@@ -5,11 +5,19 @@ namespace lp2_rec_ghosts.Model
 {
     public class Player
     {
+        /// <summary>
+        /// The Ghost currently being affected by the input received
+        /// </summary>
+        private GhostObject SelectedGhost; 
 
-        public GhostObject SelectedGhost; 
-
+        /// <summary>
+        /// The input the Player will use to control the Ghost.
+        /// </summary>
         private Vector input;
 
+        /// <summary>
+        /// The valid positions the Ghost can be moved to.
+        /// </summary>
         private Vector[] validGridInputs;
 
         /// <summary>
@@ -31,6 +39,9 @@ namespace lp2_rec_ghosts.Model
             new GhostObject[18]
         };
 
+        /// <summary>
+        /// Controls Ghosts trough Input and manages it's own list.
+        /// </summary>
         public Player()
         {
             
@@ -46,6 +57,9 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+        /// <summary>
+        /// The turn process of one single Player.
+        /// </summary>
         public void DoTurn()
         {
 
@@ -66,6 +80,14 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+        /// <summary>
+        /// Get the amount of ghosts in the specified category of the Player's
+        /// Ghost inventory.
+        /// </summary>
+        /// <param name="category"> The index of the jagged array in the first
+        /// dimension of the inventory, which specifies the kind of
+        /// ghost in the second dimension or in the Dungeon (index 4) </param>
+        /// <returns></returns>
         public int GetGhostNumbers(int category)
         {
             int count = 0;
@@ -80,6 +102,11 @@ namespace lp2_rec_ghosts.Model
             return count;
         }
 
+        /// <summary>
+        /// Put this Ghost in the Dungeon array of the jagged Ghost collection
+        /// and remove it from the other array where it is at now.
+        /// </summary>
+        /// <param name="ghost"> The ghost to be moved around.</param>
         public void SendGhostToDungeon(GhostObject ghost)
         {
             GhostObject ghostInList = null;
@@ -103,6 +130,11 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+        /// <summary>
+        /// Use input and move the selected Ghost to a tile on the board.
+        /// </summary>
+        /// <param name="givenGhost"> Null by default. Use a Ghost other 
+        /// than the one currently selected by Input.</param>
         public void MoveGhost(GhostObject givenGhost = null)
         {
             if(givenGhost == null)

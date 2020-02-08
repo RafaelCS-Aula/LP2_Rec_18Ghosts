@@ -1,5 +1,8 @@
 namespace lp2_rec_ghosts.Model.Ghosts
 {
+    /// <summary>
+    /// Red Ghosts, lose to Yellows and beat Blues.
+    /// </summary>
     public class RedGhost : GhostObject
     {
         protected override Colors BeatColor {get; set;} = Colors.BLUE;
