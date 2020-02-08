@@ -93,6 +93,24 @@ namespace lp2_rec_ghosts.Model.Ghosts
 
         }
 
+        /// <summary>
+        /// Method that gathers the positions that are orthogonally adjacent
+        /// to this Ghost.
+        /// </summary>
+        /// <returns> A vector array of 4 with it's neighbours,
+        /// starting from the top one and going clock-wise.</returns>
+        public virtual Vector[] Neighbours()
+        {
+            Vector[] neighbours = new Vector[4];
+
+            neighbours[0] = Position + new Vector(0,1);
+            neighbours[1] = Position + new Vector(1,0);
+            neighbours[2] = Position - new Vector(0,1);
+            neighbours[3] = Position - new Vector(1,0);
+
+            return neighbours;
+
+        }
 
     }
 }
