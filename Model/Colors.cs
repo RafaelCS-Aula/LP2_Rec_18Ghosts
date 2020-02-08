@@ -7,10 +7,11 @@ namespace lp2_rec_ghosts.Model
     /// </summary>
     public enum Colors
     {
-        RED,
-        YELLOW,
-        BLUE,
-        MIRROR,
-        BLOCK
+        BLOCK = 0,
+        RED = 1,
+        YELLOW = 2,
+        BLUE = 4,
+        MIRROR = 6
+        
     }
 }
