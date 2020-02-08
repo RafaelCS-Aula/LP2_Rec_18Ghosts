@@ -1,10 +1,22 @@
 using System.Collections.Generic;
+using System.Linq;
 using lp2_rec_ghosts.Model.Interfaces;
+using lp2_rec_ghosts.Model.Ghosts;
 
 namespace lp2_rec_ghosts.Model
 {
-    public class GameBoard
+    /// <summary>
+    /// Manages the Gameboard and supplies methods for outside classes to
+    /// get info on the board.
+    /// </summary>
+    public static class GameBoard
     {
+        /// <summary>
+        /// Whether the current ghost will be moved by going to an adjacent tile
+        /// or bey being "dropped" into a tile anywhere on the board.
+        /// </summary>
+        public static bool DropPlacement = false;
+
         /// <summary>
         /// The gameBoard itself stored as a collection of its grid positions
         /// and the corresponding objects.
@@ -17,17 +29,19 @@ namespace lp2_rec_ghosts.Model
         /// layer [0] being the static objects on the board (tiles/walls)
         /// the second [1] where the Ghosts are and the third [2] is
         /// where the dummy portal ghosts are.</typeparam>
-        public Dictionary<Vector, IBoardObject[]> Board 
+        public static Dictionary<Vector, IBoardObject[]> Board 
             {get; private set;} = new Dictionary<Vector, IBoardObject[]>();
 
-        // With (0,0) being the Bottom-Left of the screen  
-        // However in the console window it is the Top-Left  
 
         /// <summary>
         /// Creates the board in it's inicial state.
         /// </summary>
-        public void BuildBoard()
+        public static void BuildBoard()
         {
+
+            // With (0,0) being the Bottom-Left of the screen  
+            // However in the console window it is the Top-Left  
+
 
             // WALLS
 
@@ -132,5 +146,118 @@ namespace lp2_rec_ghosts.Model
             Board.Add(new Vector(5,1), new IBoardObject[3]
                 {new CarpetTile(Colors.YELLOW), null, null});
         }
+
+        /// <summary>
+        /// Check the current position on the grid's tile layer for any tiles
+        /// that have special logic when the Ghost on them is selected, and
+        /// run it.
+        /// </summary>
+        /// <param name="tilePosition"> The grid position of the Tile to be
+        /// checked.</param>
+        public static void ActivateSpecialTiles(Vector tilePosition)
+        {
+            IBoardObject[] tile;
+            Board.TryGetValue(tilePosition, out tile);
+            ISelectionInteractable specialTile 
+                = (tile[0] as ISelectionInteractable);
+
+            specialTile?.OnSelectedInteraction();
+
+
+        }
+
+        /// <summary>
+        /// Get the grid positions a Ghost can move to in either types of 
+        /// movement.
+        /// </summary>
+        /// <param name="ghost"> The ghost that the player wants to move.
+        /// </param>
+        /// <returns> A Vector array with all the valid positions.</returns>
+        public static Vector[] GetValidTiles(GhostObject ghost)
+        {   
+            if(DropPlacement)
+                return GetDropSpots(ghost).ToArray();
+            else    
+                return GetSlideSpots(ghost).ToArray();
+                
+
+
+        }
+
+        /// <summary>
+        /// Check the Ghost's neighbouring positions and return the ones valid
+        /// for being moved into.
+        /// </summary>
+        /// <param name="ghost"> The ghost that the player wants to move. 
+        /// </param>
+        /// <returns> A collection of all the valid tile positions.
+        /// </returns>
+        private static IEnumerable<Vector> GetSlideSpots(GhostObject ghost)
+        {
+
+            IBoardObject[] currentSpace;
+
+            if(Board.TryGetValue(ghost.Position, out currentSpace))
+            {
+                foreach(Vector v in ghost.Neighbours())
+                {
+                    Board.TryGetValue(v, out currentSpace);
+                    
+
+                    if(currentSpace[0].MyColor != Colors.BLOCK)
+                    {
+                        if(currentSpace[1] == null) 
+                            yield return v;
+                        else if (currentSpace[1] != null && 
+                            currentSpace[1].MyColor != ghost.MyColor)
+                                yield return v;
+                    }
+
+
+                }
+
+            }
+
+        }
+
+        /// <summary>
+        /// Check the board for tiles with a certain color:
+        /// First the tiles that match the color of the Ghost's tile.
+        /// And if that doesn't work, the tiles that match the color of the
+        /// Ghost itself.
+        /// </summary>
+        /// <param name="ghost"> The ghost that the player wants to move.
+        /// </param>
+        /// <returns> A collection of all the valid tile positions. </returns>
+        private static IEnumerable<Vector> GetDropSpots(GhostObject ghost)
+        {
+
+            Colors colorToMatch = Colors.BLOCK;
+            IBoardObject[] currentSpace;
+
+            if(Board.TryGetValue(ghost.Position, out currentSpace))
+            {
+                if(currentSpace[0].MyColor == Colors.BLOCK) 
+                    colorToMatch = ghost.MyColor;
+                else 
+                    colorToMatch = currentSpace[0].MyColor;
+
+            }
+
+            foreach(KeyValuePair<Vector, IBoardObject[]> g in Board)
+            {
+
+                if(g.Value[0].MyColor.Equals(colorToMatch) && 
+                    g.Value[1].Equals(null))
+                    {
+                        yield return g.Key;
+
+                    }
+
+            }
+
+
+        }
+    
     }
 }
