@@ -11,6 +11,6 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// Interaction logic for itneractions that happen the moment the object
         /// has something to interact with.
         /// </summary>
-        public void OnInstantInteraction();
+        public void OnInstantInteraction(IInstantInteractable other);
     }
 }
