@@ -13,24 +13,39 @@ namespace lp2_rec_ghosts.Model.Ghosts
         
         protected Player Owner {get; set;}
 
+        private GhostObject enemy;
+
         public GhostObject(Player owner)
         {
             this.Owner = owner;
         }
 
-        public void OnInstantInteraction()
+        public void OnInstantInteraction(IInstantInteractable other)
         {
-
+            enemy = (other as GhostObject);
+            if(enemy.MyColor == BeatColor) WinFight();
+            else if(enemy.MyColor == LoseToColor) LoseFight();
             
 
         }
 
-        public void Fight()
+        public virtual void Move(Vector newPosition)
         {
-            return;
+
+
 
 
         }
+
+        protected virtual void WinFight(){}
+        protected virtual void LoseFight()
+        {
+
+            Owner.SendGhostToDungeon(this);
+            Position = new Vector(0,0);
+
+        }
+
 
     }
 }
