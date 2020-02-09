@@ -107,6 +107,11 @@ namespace lp2_rec_ghosts.Model.Ghosts
 
         }
 
+        /// <summary>
+        /// Call the owning player's method to bust a ghost that isn't
+        /// this one out of the dungeon.
+        /// </summary>
+        /// <param name="friend"> The ghost being busted.null </param>
         protected virtual void EscapeFriend(GhostObject friend)
         {
             Owner.BustGhost(friend);
