@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using lp2_rec_ghosts.Model.Ghosts;
+using lp2_rec_ghosts.Model.BridgeClasses;
 
 namespace lp2_rec_ghosts.Model
 {
@@ -73,7 +74,7 @@ namespace lp2_rec_ghosts.Model
             // Ask for Input
             // Receive the Input as a Vector with x:[0,2] and y:[0,18]
 
-            // inp = InputReceiver.AskVector(2,18)
+            input = InputReceiver.AskGhostSelect();
             
             // Select a Ghost
             int nonNullGhosts = GetGhostNumbers(input.X);
@@ -82,7 +83,7 @@ namespace lp2_rec_ghosts.Model
             else    
                 SelectedGhost = myGhosts[input.X][input.Y];
 
-            MoveGhost();
+            UseGhost();
 
 
         }
@@ -137,6 +138,11 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+        /// <summary>
+        /// Remove Ghosts from the player's list of Ghosts.
+        /// And call the score updater.
+        /// </summary>
+        /// <param name="goneGhost"></param>
         public void BustGhost(GhostObject goneGhost)
         {
 
@@ -158,7 +164,11 @@ namespace lp2_rec_ghosts.Model
 
         }
 
-
+        /// <summary>
+        /// Add to the player's score depending on color of Ghost.null
+        /// Also updates total score of player.
+        /// </summary>
+        /// <param name="escapedGhostColor"> Ghost that escaped </param>
         private void UpdateScores(Colors escapedGhostColor)
         {
             switch(escapedGhostColor)
@@ -186,7 +196,7 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         /// <param name="givenGhost"> Null by default. Use a Ghost other 
         /// than the one currently selected by Input.</param>
-        public void MoveGhost(GhostObject givenGhost = null)
+        public void UseGhost(GhostObject givenGhost = null)
         {
             if(givenGhost == null)
                 givenGhost = SelectedGhost;
@@ -196,16 +206,20 @@ namespace lp2_rec_ghosts.Model
             // return
 
             // Check if tile the ghost is on has any effect on the it
-            // GameBoard.ActivateSpecialTile(SelectedGhost.Position)
+            GameBoard.ActivateSpecialTile(SelectedGhost.Position);
 
             // Ask for the valid tiles to place Ghost
-            // ValidGridInputs = 
-            // GameBoard.GetValidTiles(ColorToMatch: SelectedGhost.MyColor);
+             validGridInputs = GameBoard.GetValidTiles(SelectedGhost);
             
             
             // Ask for Input
             // Receive it as a Vector.
-            // SelectedGhost.Move(input)
+            
+            //input = InputReceiver.AskTileSelect();
+
+            //TODO: GHOST HAS TO FIGTH BEFOR EMOVING
+            //
+            SelectedGhost.Move(input);
             
 
         }
