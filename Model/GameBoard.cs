@@ -77,18 +77,32 @@ namespace lp2_rec_ghosts.Model
 
             // PORTALS
 
+            IBoardObject[] gridSpace;
             // Bottom Portal            
             Board.Add(new Vector(3,1), new IBoardObject[3]
                 {new CarpetTile(Colors.BLOCK), null, null});
 
+            // Corresponding dummy ghost.
+            Board.TryGetValue(new Vector(3,0), out gridSpace );
+            gridSpace[2] = new PortalDummyGhost(Colors.BLUE);
+
+            
             // Right Portal            
             Board.Add(new Vector(5,3), new IBoardObject[3]
                 {new CarpetTile(Colors.BLOCK), null, null});
+
+            // Corresponding dummy ghost.
+            Board.TryGetValue(new Vector(6,3), out gridSpace );
+            gridSpace[2] = new PortalDummyGhost(Colors.YELLOW);
 
             // Top Portal            
             Board.Add(new Vector(3,5), new IBoardObject[3]
                 {new CarpetTile(Colors.BLOCK), null, null});
 
+            // Corresponding dummy ghost.
+            Board.TryGetValue(new Vector(3,6), out gridSpace );
+            gridSpace[2] = new PortalDummyGhost(Colors.RED);
+           
 
             // CARPETS
 
@@ -154,7 +168,7 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         /// <param name="tilePosition"> The grid position of the Tile to be
         /// checked.</param>
-        public static void ActivateSpecialTiles(Vector tilePosition)
+        public static void ActivateSpecialTile(Vector tilePosition)
         {
             IBoardObject[] tile;
             Board.TryGetValue(tilePosition, out tile);
@@ -256,6 +270,24 @@ namespace lp2_rec_ghosts.Model
 
             }
 
+
+        }
+
+        /// <summary>
+        /// Update the board itself to reflect the changes made to Ghosts' 
+        /// positions over time.
+        /// </summary>
+        /// <param name="ghost"> Ghost who will be put on the board's layer
+        /// </param>
+        public static void UpdateGhostOnBoard(GhostObject ghost)
+        { 
+            IBoardObject[] currentSpace;
+
+            Board.TryGetValue(ghost.Position, out currentSpace);
+
+            if(currentSpace[1] != null)
+                currentSpace[1] = null;
+            currentSpace[1] = ghost;
 
         }
     
