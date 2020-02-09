@@ -2,6 +2,9 @@ using lp2_rec_ghosts.Model.Interfaces;
 
 namespace lp2_rec_ghosts.Model
 {
+    /// <summary>
+    /// Base class for all the tiles of the game.
+    /// </summary>
     public class CarpetTile : IBoardObject
     {
 
