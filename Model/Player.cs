@@ -235,9 +235,6 @@ namespace lp2_rec_ghosts.Model
             // Check if tile the ghost is on has any effect on the it
             GameBoard.ActivateSpecialTile(givenGhost.Position);
 
-            // Ask for the valid tiles to place Ghost
-             validGridInputs = GameBoard.GetValidTiles(givenGhost);
-            
             
             // Ask for Input
             // Receive it as a Vector.

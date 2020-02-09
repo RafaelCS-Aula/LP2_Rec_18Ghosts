@@ -1,4 +1,5 @@
 using lp2_rec_ghosts.Model.Interfaces;
+using lp2_rec_ghosts.Model.Ghosts;
 
 namespace lp2_rec_ghosts.Model.BridgeClasses
 {
@@ -14,6 +15,7 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
         /// </summary>
         public static IInputHandler InputSender {get; set;}
 
+        private static Vector[] ValidGridInputs;
     
         /// <summary>
         /// Ask the outer class for input and wait until it gets a valid one.
@@ -27,12 +29,48 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
                 RenderInfo.ScreenMessage("Select a Ghost");
                 InputSender.AwaitVectorInput(out x, out y);
 
-            if(!(x >= 0 && x <= 2)) 
+            if(!(x >= 0 && x <= 2) && !(y >= 0 && y <= 18) )
+            {
+                RenderInfo.ScreenMessage("Invalid Input!");
                 goto InputRequest;
-            if(!(y >= 0 && y <= 18))
-                goto InputRequest;
+            } 
+                
+
 
             return new Vector((int)x,(int)y);
+        }
+
+        /// <summary>
+        /// Asks the outside Input class for Input and then 
+        /// evalute it in the context of the board grid.
+        /// </summary>
+        /// <param name="ghostToBeMoved"> The Ghost that the player
+        /// wants to move.</param>
+        /// <returns> A valid grid position for the Ghost to be moved into
+        /// </returns>
+        public static Vector AskTileSelect(GhostObject ghostToBeMoved)
+        {
+            ValidGridInputs = GameBoard.GetValidTiles(ghostToBeMoved);
+
+            float x, y;
+
+            InputRequest:
+                RenderInfo.ScreenMessage("Select a Tile");
+                InputSender.AwaitVectorInput(out x, out y);
+
+            foreach(Vector v in ValidGridInputs)
+            {
+                if(!(v.X == x && v.Y == y))
+                {
+                    RenderInfo.ScreenMessage("Invalid Tile!");
+                    goto InputRequest;
+                }
+                else 
+                    break;
+            }
+
+            return new Vector((int)x, (int)y);
+
         }
 
     }
