@@ -5,6 +5,13 @@ namespace lp2_rec_ghosts.Model
 {
     public class Player
     {
+
+        public int ScoreRed {get; private set;}
+        public int ScoreBlue {get; private set;}
+        public int ScoreYellow {get; private set;}
+        public int ScoreTotal{get; private set;}
+
+
         /// <summary>
         /// The Ghost currently being affected by the input received
         /// </summary>
@@ -130,6 +137,28 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+
+        public void UpdateScores(Colors escapedGhostColor)
+        {
+            switch(escapedGhostColor)
+            {
+                case Colors.RED:
+                    ScoreRed++;
+                    break;
+                case Colors.BLUE:
+                    ScoreBlue++;
+                    break;
+                case Colors.YELLOW:
+                    ScoreYellow++;
+                    break;
+                default:
+                    break;
+            }
+
+            ScoreTotal = ScoreYellow + ScoreRed + ScoreBlue;
+
+        }
+
         /// <summary>
         /// Use input and move the selected Ghost to a tile on the board.
         /// </summary>
@@ -145,11 +174,11 @@ namespace lp2_rec_ghosts.Model
             // return
 
             // Check if tile the ghost is on has any effect on the it
-            // BoardAnalyser.ActivateSpecialTile(SelectedGhost.Position)
+            // GameBoard.ActivateSpecialTile(SelectedGhost.Position)
 
             // Ask for the valid tiles to place Ghost
             // ValidGridInputs = 
-            // BoardAnalyser.GetValidTiles(ColorToMatch: SelectedGhost.MyColor);
+            // GameBoard.GetValidTiles(ColorToMatch: SelectedGhost.MyColor);
             
             
             // Ask for Input
