@@ -17,14 +17,35 @@ namespace lp2_rec_ghosts.Model.Ghosts
 
         public PortalDummyGhost(Colors myColor, Player owner = null):
             base(owner)
-            {
-                MyColor = myColor;
-                BeatColor = MyColor;
-                LoseToColor &= ~MyColor; 
+        {
+            MyColor = myColor;
+            BeatColor = MyColor;
+            LoseToColor &= ~MyColor; 
 
 
-            }
+        }
+
+        protected override void WinFight()
+        {
+
+            EscapeFriend(enemy);
+
+        }
+
+        protected override void LoseFight(){}
                  
+        public override void Move()
+        {   
+            /* Rotating a 2D Vector by 90ª:
+            *  multiplying X by -1 and then switching the axis.
+            */
+
+            Vector newPosition =
+            new Vector(Position.Y, -Position.X);
+
+            Position = newPosition;
+
+        }
 
     }
 }

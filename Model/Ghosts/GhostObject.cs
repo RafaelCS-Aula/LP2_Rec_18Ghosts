@@ -41,7 +41,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
         /// <summary>
         /// The Ghost this Ghost is fighting with.
         /// </summary>
-        private GhostObject enemy;
+        protected GhostObject enemy;
 
         /// <summary>
         /// Abstract constructor of the Ghost super class.
@@ -69,13 +69,8 @@ namespace lp2_rec_ghosts.Model.Ghosts
         /// Place the Ghost in a new grid position.
         /// </summary>
         /// <param name="newPosition"> The Ghost's new grid position</param>
-        public virtual void Move(Vector newPosition)
-        {
-
-
-            // TODO: DECIDE IF THE GHOST DOES THIS OR SOMETHIGN ELSE
-
-        }
+        public virtual void Move(Vector newPosition) => Position = newPosition;
+        public virtual void Move(){}
 
         /// <summary>
         /// The Ghost has won his fight with another Ghost.
@@ -110,6 +105,11 @@ namespace lp2_rec_ghosts.Model.Ghosts
 
             return neighbours;
 
+        }
+
+        protected virtual void EscapeFriend(GhostObject friend)
+        {
+            Owner.BustGhost(friend);
         }
 
     }
