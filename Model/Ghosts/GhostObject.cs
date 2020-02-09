@@ -38,10 +38,13 @@ namespace lp2_rec_ghosts.Model.Ghosts
         /// <value> A Player object </value>
         protected Player Owner {get; set;}
 
+        public bool InDungeon {get; set;} = false;
+
         /// <summary>
         /// The Ghost this Ghost is fighting with.
         /// </summary>
         protected GhostObject enemy;
+        
 
         /// <summary>
         /// Abstract constructor of the Ghost super class.
@@ -66,10 +69,33 @@ namespace lp2_rec_ghosts.Model.Ghosts
         }
 
         /// <summary>
-        /// Place the Ghost in a new grid position.
+        /// Place the Ghost in a new grid position. After checking if there is
+        /// anything to fight.
         /// </summary>
         /// <param name="newPosition"> The Ghost's new grid position</param>
-        public virtual void Move(Vector newPosition) => Position = newPosition;
+        public virtual void Move(Vector newPosition)
+        {
+            IBoardObject[] gridSpace;
+            GameBoard.Board.TryGetValue(newPosition, out gridSpace );
+
+            IInstantInteractable possibleGhost = gridSpace[1] as GhostObject;
+            IInstantInteractable possiblePortal 
+                = gridSpace[2] as PortalDummyGhost; 
+
+            possibleGhost?.OnInstantInteraction(this);
+            
+            if(possibleGhost != null) OnInstantInteraction(possibleGhost);
+
+            possiblePortal?.OnInstantInteraction(this);
+
+            // Since Ghosts go to 0,0 when sent to dungeon
+            // we can check their status like this.
+            if(!InDungeon)
+                Position = newPosition;
+            GameBoard.UpdateGhostOnBoard(this);
+
+        } 
+        
         public virtual void Move(){}
 
         /// <summary>
@@ -114,7 +140,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
         /// <param name="friend"> The ghost being busted.null </param>
         protected virtual void EscapeFriend(GhostObject friend)
         {
-            Owner.BustGhost(friend);
+            Owner.BustGhost(friend, true);
         }
 
     }
