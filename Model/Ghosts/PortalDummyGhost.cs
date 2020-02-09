@@ -37,13 +37,14 @@ namespace lp2_rec_ghosts.Model.Ghosts
         public override void Move()
         {   
             /* Rotating a 2D Vector by 90ª:
-            *  multiplying X by -1 and then switching the axis.
+            *  multiplying X by -1 and then switching the axis'.
             */
 
             Vector newPosition =
-            new Vector(Position.Y, -Position.X);
+                new Vector(Position.Y, -Position.X);
 
             Position = newPosition;
+            GameBoard.UpdateGhostOnBoard(this);
 
         }
 
