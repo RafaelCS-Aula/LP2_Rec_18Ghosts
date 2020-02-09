@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.BridgeClasses;
 
@@ -94,7 +93,7 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         /// <param name="category"> The index of the jagged array in the first
         /// dimension of the inventory, which specifies the kind of
-        /// ghost in the second dimension or in the Dungeon (index 4) </param>
+        /// ghost in the second dimension or in the Dungeon (index 3) </param>
         /// <returns></returns>
         public int GetGhostNumbers(int category)
         {
@@ -134,7 +133,8 @@ namespace lp2_rec_ghosts.Model
                 }
             }
 
-            myGhosts[4][GetGhostNumbers(4)] = ghostInList;
+            ghostInList.InDungeon = true;
+            myGhosts[3][GetGhostNumbers(3)] = ghostInList;
 
         }
 
@@ -142,8 +142,10 @@ namespace lp2_rec_ghosts.Model
         /// Remove Ghosts from the player's list of Ghosts.
         /// And call the score updater.
         /// </summary>
-        /// <param name="goneGhost"></param>
-        public void BustGhost(GhostObject goneGhost)
+        /// <param name="goneGhost"> Ghost to be removed< /param>
+        /// <param name="updateScores"> Whether the Player's score should
+        /// be updated witht he removal of the ghost.</param>
+        public void BustGhost(GhostObject goneGhost, bool updateScores)
         {
 
             // find the desired ghost
@@ -160,7 +162,26 @@ namespace lp2_rec_ghosts.Model
                 }
             }
 
-            UpdateScores(goneGhost.MyColor);
+            if(updateScores)
+                UpdateScores(goneGhost.MyColor);
+
+        }
+
+        public void AddGhost(GhostObject ghost)
+        {
+            switch(ghost.MyColor)
+            {
+                case (Colors.RED):
+                    myGhosts[0][GetGhostNumbers(0) - 1] = ghost;
+                    break;
+                case (Colors.BLUE):
+                    myGhosts[1][GetGhostNumbers(0) - 1] = ghost;
+                    break;
+                case (Colors.YELLOW):
+                    myGhosts[2][GetGhostNumbers(0) - 1] = ghost;
+                    break;
+            }
+
 
         }
 
@@ -201,24 +222,28 @@ namespace lp2_rec_ghosts.Model
             if(givenGhost == null)
                 givenGhost = SelectedGhost;
 
-            // If it's a dungoned ghost:
-            // GameMaster.TransferGhosts(this, SelectedGhost);
-            // return
+            // If it's a dungeoned ghost:
+            if(givenGhost.InDungeon)
+            {
+
+                GameController.TransferGhost(this, givenGhost);
+                return;
+
+            }
+
 
             // Check if tile the ghost is on has any effect on the it
-            GameBoard.ActivateSpecialTile(SelectedGhost.Position);
+            GameBoard.ActivateSpecialTile(givenGhost.Position);
 
             // Ask for the valid tiles to place Ghost
-             validGridInputs = GameBoard.GetValidTiles(SelectedGhost);
+             validGridInputs = GameBoard.GetValidTiles(givenGhost);
             
             
             // Ask for Input
             // Receive it as a Vector.
             
-            //input = InputReceiver.AskTileSelect();
+            input = InputReceiver.AskTileSelect(givenGhost);
 
-            //TODO: GHOST HAS TO FIGTH BEFOR EMOVING
-            //
             SelectedGhost.Move(input);
             
 
