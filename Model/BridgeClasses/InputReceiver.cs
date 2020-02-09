@@ -73,5 +73,8 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
 
         }
 
+        public static bool AskBoolSelect() => InputSender.AwaitBoolInput();
+
+
     }
 }
