@@ -13,6 +13,10 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         /// <value></value>
         private static Player[] Players {get; set;} = new Player[2]; 
+        private Player CurrentPlayer {get; set;}
+        public static bool FastMode {get; private set;} = false;
+
+
 
         /// <summary>
         /// Constructor creates the Players and builds the Board. 
@@ -23,26 +27,46 @@ namespace lp2_rec_ghosts.Model
             Players[1] = new Player();
 
             GameBoard.BuildBoard();
+
+            RenderInfo.ScreenMessage("Turn fast mode ON?");
+            FastMode = InputReceiver.AskBoolSelect();   
+            RenderInfo.ScreenMessage("FastMode is currently: " + FastMode);
+
             StartGame();
             
         }
 
         private void StartGame()
         {
+            Players[0].DoTurn();
+            Players[0].DoTurn();
+            for(int i = 1; i < 1666; i++)
+            {
+                CurrentPlayer = Players[i % 2];
+                CurrentPlayer.DoTurn();
+                
+                if(FastMode && CurrentPlayer.ScoreTotal >= 3)
+                {
 
+                    RenderInfo.ScreenMessage($"Player {i + 1} WINS!");
+                    break;
+                }
+                else if (!FastMode)
+                {
+                    if( CurrentPlayer.ScoreRed >= 1 && 
+                        CurrentPlayer.ScoreBlue >= 1 &&
+                        CurrentPlayer.ScoreYellow >= 1)
+                    {
+                        RenderInfo.ScreenMessage($"Player {i + 1} WINS!");
+                        break;
+                    }
+                }
+                    
 
-            // Execute one turn
-            Turn();
-        }
+            }
 
-        /// <summary>
-        /// Logic of 1 in-game turn.
-        /// </summary>
-        private void Turn()
-        {
+            EndGame();
 
-
-            
         }
 
         public static void TransferGhost(
@@ -63,6 +87,12 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+        private void EndGame()
+        {
+
+            RenderInfo.ScreenMessage("GAME OVER!");
+
+        }
 
     }
 }
