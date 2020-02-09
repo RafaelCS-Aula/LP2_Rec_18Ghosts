@@ -1,4 +1,5 @@
 using lp2_rec_ghosts.Model.BridgeClasses;
+using lp2_rec_ghosts.Model.Ghosts;
 
 namespace lp2_rec_ghosts.Model
 {
@@ -11,7 +12,7 @@ namespace lp2_rec_ghosts.Model
         /// List of Players.
         /// </summary>
         /// <value></value>
-        private Player[] Players {get; set;} = new Player[2]; 
+        private static Player[] Players {get; set;} = new Player[2]; 
 
         /// <summary>
         /// Constructor creates the Players and builds the Board. 
@@ -42,6 +43,24 @@ namespace lp2_rec_ghosts.Model
 
 
             
+        }
+
+        public static void TransferGhost(
+            Player sender, GhostObject ghost)
+        {
+            sender.BustGhost(ghost, false);
+            foreach(Player p in Players)
+            {
+                if(!p.Equals(sender))
+                    p.AddGhost(ghost);
+
+                ghost.InDungeon = false;
+                GameBoard.DropPlacement = true;
+                p.UseGhost(ghost);
+            }
+
+            
+
         }
 
 
