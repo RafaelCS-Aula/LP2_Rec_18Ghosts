@@ -137,8 +137,29 @@ namespace lp2_rec_ghosts.Model
 
         }
 
+        public void BustGhost(GhostObject goneGhost)
+        {
 
-        public void UpdateScores(Colors escapedGhostColor)
+            // find the desired ghost
+            for (int i = 0; i < 3; i++)
+            {
+                for(int z = 0; z < 6; i++)
+                {
+
+                    if(myGhosts[i][z].Equals(goneGhost))
+                    {
+                        myGhosts[i][z] = null;
+                        break;
+                    }
+                }
+            }
+
+            UpdateScores(goneGhost.MyColor);
+
+        }
+
+
+        private void UpdateScores(Colors escapedGhostColor)
         {
             switch(escapedGhostColor)
             {
@@ -158,6 +179,7 @@ namespace lp2_rec_ghosts.Model
             ScoreTotal = ScoreYellow + ScoreRed + ScoreBlue;
 
         }
+
 
         /// <summary>
         /// Use input and move the selected Ghost to a tile on the board.
