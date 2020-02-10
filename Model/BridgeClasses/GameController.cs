@@ -13,9 +13,18 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
         /// <summary>
         /// List of Players.
         /// </summary>
-        /// <value></value>
         private static Player[] Players {get; set;} = new Player[2]; 
+
+        /// <summary>
+        /// Player whose turn is up.
+        /// </summary>
         private static Player CurrentPlayer {get; set;}
+
+        /// <summary>
+        /// What the win condition is.
+        /// </summary>
+        /// <value> TRUE: 3 escaped Ghosts of any color.
+        /// FALSE: Atleast 1 escaped Ghost of each color.</value>
         public static bool FastMode {get; private set;} = false;
 
         public static GameBoard GBoard {get; private set;}
@@ -39,8 +48,12 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
             
         }
 
+        /// <summary>
+        /// Start the game and then enter the main game loop
+        /// </summary>
         private static void StartGame()
         {
+            
             Players[0].DoTurn();
             Players[0].DoTurn();
             for(int i = 1; i < 1666; i++)
@@ -72,6 +85,12 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
 
         }
 
+        /// <summary>
+        /// Transfer a Ghost from one Player's inventory to the 
+        /// other's.
+        /// </summary>
+        /// <param name="sender"> Player giving away the Ghost</param>
+        /// <param name="ghost"> Ghost getting sent over.</param>
         public static void TransferGhost(
             Player sender, GhostObject ghost)
         {
@@ -90,6 +109,10 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
 
         }
 
+        /// <summary>
+        /// Once the game loop is exited, show a message to indicate the game
+        /// is over.
+        /// </summary>
         private static void EndGame()
         {
 

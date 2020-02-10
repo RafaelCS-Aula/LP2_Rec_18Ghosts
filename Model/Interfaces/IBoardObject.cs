@@ -16,7 +16,7 @@ namespace lp2_rec_ghosts.Model.Interfaces
         public Vector Position {get; set;}
 
         /// <summary>
-        /// The obejct's color and also type such as Mirror or Block.
+        /// The obejct's color, can also be its type such as Mirror or Block.
         /// </summary>
         /// <value> The Colors value, necessary for comaprisons between objects
         ///  </value>

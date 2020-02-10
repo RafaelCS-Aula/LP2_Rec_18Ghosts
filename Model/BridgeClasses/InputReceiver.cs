@@ -75,6 +75,10 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
 
         }
 
+        /// <summary>
+        /// Call the InputSender's AwaitBoolInput() method.
+        /// </summary>
+        /// <returns> A boolean gotten from AwaitBoolInput.</returns>
         public static bool AskBoolSelect() => InputSender.AwaitBoolInput();
 
 

@@ -6,10 +6,26 @@ namespace lp2_rec_ghosts.Model.GameTypes
 {
     public class Player
     {
+        // All the Scores that are kept updated to evaluate the win condition.
 
+        /// <summary>
+        /// Player's Red Ghosts that have escaped.
+        /// </summary>
         public int ScoreRed {get; private set;}
+
+        /// <summary>
+        /// Player's Blue Ghosts that have escaped.
+        /// </summary>
         public int ScoreBlue {get; private set;}
+
+        /// <summary>
+        /// Player's Yellow Ghosts that have escaped.
+        /// </summary>
         public int ScoreYellow {get; private set;}
+
+        /// <summary>
+        /// Total number of the Player's Ghosts that have escaped.
+        /// </summary>
         public int ScoreTotal{get; private set;}
 
 
@@ -66,10 +82,12 @@ namespace lp2_rec_ghosts.Model.GameTypes
         }
 
         /// <summary>
-        /// The turn process of one single Player.
+        /// Begin the Player's turn, asking for input to select a Ghost.
         /// </summary>
         public void DoTurn()
         {
+
+            RenderInfo.UpdateGhostListing(myGhosts);
 
             // Ask for Input
             // Receive the Input as a Vector with x:[0,2] and y:[0,18]
@@ -168,6 +186,11 @@ namespace lp2_rec_ghosts.Model.GameTypes
 
         }
 
+        /// <summary>
+        /// Add a Ghost to the last available spot in the 
+        /// adequate array in the player's ghost inventory.
+        /// </summary>
+        /// <param name="ghost"> Ghost to join the Player's side. </param>
         public void AddGhost(GhostObject ghost)
         {
             switch(ghost.MyColor)

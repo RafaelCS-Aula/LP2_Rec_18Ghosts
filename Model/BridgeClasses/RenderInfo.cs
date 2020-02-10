@@ -1,4 +1,7 @@
 using lp2_rec_ghosts.Model.Interfaces;
+using System.Collections.Generic;
+using lp2_rec_ghosts.Model.GameTypes;
+using lp2_rec_ghosts.Model.Ghosts;
 
 namespace lp2_rec_ghosts.Model.BridgeClasses
 {
@@ -24,6 +27,30 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
             OutsideRenderer.DrawMessage(msg);
 
         }
+
+        /// <summary>
+        /// Call the OutsideRenderer's DrawGhostList() method.
+        /// </summary>
+        /// <param name="list"> Player's Ghost inventory.</param>
+        public static void UpdateGhostListing(GhostObject[][] list)
+        {
+
+            OutsideRenderer.DrawGhostList(list);
+
+        }
+
+        /// <summary>
+        /// Call the OutsideRenderer's DrawBoard() method.
+        /// </summary>
+        /// <param name="board"> The game board in the current state to be
+        /// rendered on screen. </param>
+        public static void UpdateBoardDraw(
+            Dictionary<Vector, IBoardObject[]> board)
+            {
+
+                OutsideRenderer.DrawBoard(board);
+
+            }
 
     }
 }

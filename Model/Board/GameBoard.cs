@@ -36,9 +36,9 @@ namespace lp2_rec_ghosts.Model.Board
             {get; private set;} = new Dictionary<Vector, IBoardObject[]>();
 
 
-        PortalDummyGhost RedDummy;
-        PortalDummyGhost BlueDummy;
-        PortalDummyGhost YellowDummy;
+        private PortalDummyGhost RedDummy;
+        private PortalDummyGhost BlueDummy;
+        private PortalDummyGhost YellowDummy;
 
         /// <summary>
         /// Creates the board in it's inicial state.
@@ -286,6 +286,10 @@ namespace lp2_rec_ghosts.Model.Board
 
         }
 
+        /// <summary>
+        /// Moves the dummy ghost to the next aproppriate location
+        /// </summary>
+        /// <param name="Color"> Color of the ghost who died. </param>
         public void RotatePortal(Colors Color)
         {
             switch(Color)
@@ -322,7 +326,7 @@ namespace lp2_rec_ghosts.Model.Board
                 currentSpace[1] = null;
             currentSpace[1] = ghost;
 
-            RenderInfo.UpdateBoardDraw();
+            RenderInfo.UpdateBoardDraw(Board);
 
         }
     

@@ -27,14 +27,6 @@ namespace lp2_rec_ghosts.Model.GameTypes
             Y = y;
 
         }
-
-        /// <summary>
-        /// Method to quickly check if the current vector is a diagonal
-        /// translation from its origin.
-        /// </summary>
-        /// <returns> Whether either the X and Y components are 
-        /// diferent than 0.</returns>
-        public bool isDiagonal() => Y != 0 && X != 0;
             
         /// <summary>
         /// Override to define the sum of 2 Vectors.

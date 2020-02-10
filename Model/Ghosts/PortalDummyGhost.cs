@@ -29,6 +29,9 @@ namespace lp2_rec_ghosts.Model.Ghosts
 
         }
 
+        /// <summary>
+        /// If the dummy wins a fight, it'll make the enemy teleport away.
+        /// </summary>
         protected override void WinFight()
         {
 
@@ -36,8 +39,15 @@ namespace lp2_rec_ghosts.Model.Ghosts
 
         }
 
+        /// <summary>
+        /// Don't do anything if Ghost loses fight.
+        /// </summary>
         protected override void LoseFight(){}
                  
+        /// <summary>
+        /// Apply a translation to the dummy ghost so to move it 90ª
+        /// clockwise.
+        /// </summary>
         public override void Move()
         {   
             /* Rotating a 2D Vector by 90ª:

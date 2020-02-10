@@ -13,6 +13,13 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// <param name="x">The wanted X component of the Vector</param>
         /// <param name="y">The wanted Y component of the Vector</param>
         public void AwaitVectorInput(out float x, out float y);
+
+        /// <summary>
+        /// Get a Boolean value from the outside, to be used
+        /// as input once inside the model.
+        /// </summary>
+        /// <returns> A boolean value to be used as input in the model.
+        /// </returns>
         public bool AwaitBoolInput();
 
     }
