@@ -113,6 +113,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
         {
 
             Owner.SendGhostToDungeon(this);
+            GameController.GBoard.RotatePortal(MyColor);
             Position = new Vector(0,0);
 
         }

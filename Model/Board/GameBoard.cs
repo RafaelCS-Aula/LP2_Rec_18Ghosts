@@ -4,6 +4,7 @@ using lp2_rec_ghosts.Model.Interfaces;
 using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.GameTypes;
 using lp2_rec_ghosts.Model.Enums;
+using lp2_rec_ghosts.Model.BridgeClasses;
 
 namespace lp2_rec_ghosts.Model.Board
 {
@@ -35,11 +36,18 @@ namespace lp2_rec_ghosts.Model.Board
             {get; private set;} = new Dictionary<Vector, IBoardObject[]>();
 
 
+        PortalDummyGhost RedDummy;
+        PortalDummyGhost BlueDummy;
+        PortalDummyGhost YellowDummy;
+
         /// <summary>
         /// Creates the board in it's inicial state.
         /// </summary>
         public GameBoard()
         {
+            RedDummy = new PortalDummyGhost(Colors.RED);
+            BlueDummy = new PortalDummyGhost(Colors.BLUE);
+            YellowDummy = new PortalDummyGhost(Colors.YELLOW);
 
             // With (0,0) being the Bottom-Left of the screen  
             // However in the console window it is the Top-Left  
@@ -86,7 +94,8 @@ namespace lp2_rec_ghosts.Model.Board
 
             // Corresponding dummy ghost.
             Board.TryGetValue(new Vector(3,0), out gridSpace );
-            gridSpace[2] = new PortalDummyGhost(Colors.BLUE);
+            gridSpace[2] = BlueDummy;
+            BlueDummy.Position = new Vector(3,0);
 
             
             // Right Portal            
@@ -95,7 +104,8 @@ namespace lp2_rec_ghosts.Model.Board
 
             // Corresponding dummy ghost.
             Board.TryGetValue(new Vector(6,3), out gridSpace );
-            gridSpace[2] = new PortalDummyGhost(Colors.YELLOW);
+            gridSpace[2] = YellowDummy;
+            YellowDummy.Position = new Vector(6,3);
 
             // Top Portal            
             Board.Add(new Vector(3,5), new IBoardObject[3]
@@ -103,7 +113,8 @@ namespace lp2_rec_ghosts.Model.Board
 
             // Corresponding dummy ghost.
             Board.TryGetValue(new Vector(3,6), out gridSpace );
-            gridSpace[2] = new PortalDummyGhost(Colors.RED);
+            gridSpace[2] = RedDummy;
+            RedDummy.Position = new Vector(3,6);
            
 
             // CARPETS
@@ -275,6 +286,26 @@ namespace lp2_rec_ghosts.Model.Board
 
         }
 
+        public void RotatePortal(Colors Color)
+        {
+            switch(Color)
+            {
+                case(Colors.RED):
+                    RedDummy.Move();
+                    break;
+                case(Colors.BLUE):
+                    BlueDummy.Move();
+                    break;
+                case(Colors.YELLOW):
+                    YellowDummy.Move();
+                    break;
+                default:
+                    break;
+
+
+            }
+        }
+
         /// <summary>
         /// Update the board itself to reflect the changes made to Ghosts' 
         /// positions over time.
@@ -290,6 +321,8 @@ namespace lp2_rec_ghosts.Model.Board
             if(currentSpace[1] != null)
                 currentSpace[1] = null;
             currentSpace[1] = ghost;
+
+            RenderInfo.UpdateBoardDraw();
 
         }
     
