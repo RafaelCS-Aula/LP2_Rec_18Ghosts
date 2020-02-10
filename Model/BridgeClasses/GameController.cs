@@ -3,7 +3,7 @@ using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.GameTypes;
 using lp2_rec_ghosts.Model.Board;
 
-namespace lp2_rec_ghosts.Model
+namespace lp2_rec_ghosts.Model.BridgeClasses
 {
     /// <summary>
     /// Main class to control the flow of the game.

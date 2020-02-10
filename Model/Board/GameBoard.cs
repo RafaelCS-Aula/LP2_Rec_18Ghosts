@@ -5,7 +5,7 @@ using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.GameTypes;
 using lp2_rec_ghosts.Model.Enums;
 
-namespace lp2_rec_ghosts.Model
+namespace lp2_rec_ghosts.Model.Board
 {
     /// <summary>
     /// Manages the Gameboard and supplies methods for outside classes to

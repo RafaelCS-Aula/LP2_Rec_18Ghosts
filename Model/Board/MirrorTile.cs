@@ -1,5 +1,6 @@
 using lp2_rec_ghosts.Model.Interfaces;
 using lp2_rec_ghosts.Model.Enums;
+using lp2_rec_ghosts.Model.BridgeClasses;
 
 namespace lp2_rec_ghosts.Model.Board
 {
