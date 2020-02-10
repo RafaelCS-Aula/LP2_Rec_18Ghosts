@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using lp2_rec_ghosts.Model.Interfaces;
 using lp2_rec_ghosts.Model.Ghosts;
+using lp2_rec_ghosts.Model.GameTypes;
+using lp2_rec_ghosts.Model.Enums;
 
 namespace lp2_rec_ghosts.Model
 {
@@ -9,13 +11,13 @@ namespace lp2_rec_ghosts.Model
     /// Manages the Gameboard and supplies methods for outside classes to
     /// get info on the board.
     /// </summary>
-    public static class GameBoard
+    public class GameBoard
     {
         /// <summary>
         /// Whether the current ghost will be moved by going to an adjacent tile
         /// or bey being "dropped" into a tile anywhere on the board.
         /// </summary>
-        public static bool DropPlacement = false;
+        public bool DropPlacement = false;
 
         /// <summary>
         /// The gameBoard itself stored as a collection of its grid positions
@@ -36,7 +38,7 @@ namespace lp2_rec_ghosts.Model
         /// <summary>
         /// Creates the board in it's inicial state.
         /// </summary>
-        public static void BuildBoard()
+        public GameBoard()
         {
 
             // With (0,0) being the Bottom-Left of the screen  
@@ -168,7 +170,7 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         /// <param name="tilePosition"> The grid position of the Tile to be
         /// checked.</param>
-        public static void ActivateSpecialTile(Vector tilePosition)
+        public void ActivateSpecialTile(Vector tilePosition)
         {
             IBoardObject[] tile;
             Board.TryGetValue(tilePosition, out tile);
@@ -187,7 +189,7 @@ namespace lp2_rec_ghosts.Model
         /// <param name="ghost"> The ghost that the player wants to move.
         /// </param>
         /// <returns> A Vector array with all the valid positions.</returns>
-        public static Vector[] GetValidTiles(GhostObject ghost)
+        public Vector[] GetValidTiles(GhostObject ghost)
         {   
             if(DropPlacement)
                 return GetDropSpots(ghost).ToArray();
@@ -206,7 +208,7 @@ namespace lp2_rec_ghosts.Model
         /// </param>
         /// <returns> A collection of all the valid tile positions.
         /// </returns>
-        private static IEnumerable<Vector> GetSlideSpots(GhostObject ghost)
+        private IEnumerable<Vector> GetSlideSpots(GhostObject ghost)
         {
 
             IBoardObject[] currentSpace;
@@ -243,7 +245,7 @@ namespace lp2_rec_ghosts.Model
         /// <param name="ghost"> The ghost that the player wants to move.
         /// </param>
         /// <returns> A collection of all the valid tile positions. </returns>
-        private static IEnumerable<Vector> GetDropSpots(GhostObject ghost)
+        private IEnumerable<Vector> GetDropSpots(GhostObject ghost)
         {
 
             Colors colorToMatch = Colors.BLOCK;
@@ -279,7 +281,7 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         /// <param name="ghost"> Ghost who will be put on the board's layer
         /// </param>
-        public static void UpdateGhostOnBoard(GhostObject ghost)
+        public void UpdateGhostOnBoard(GhostObject ghost)
         { 
             IBoardObject[] currentSpace;
 

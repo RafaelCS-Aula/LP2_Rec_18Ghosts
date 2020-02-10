@@ -1,5 +1,6 @@
 using lp2_rec_ghosts.Model.Interfaces;
 using lp2_rec_ghosts.Model.Ghosts;
+using lp2_rec_ghosts.Model.GameTypes;
 
 namespace lp2_rec_ghosts.Model.BridgeClasses
 {
@@ -50,7 +51,8 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
         /// </returns>
         public static Vector AskTileSelect(GhostObject ghostToBeMoved)
         {
-            ValidGridInputs = GameBoard.GetValidTiles(ghostToBeMoved);
+            ValidGridInputs = 
+                GameController.GBoard.GetValidTiles(ghostToBeMoved);
 
             float x, y;
 

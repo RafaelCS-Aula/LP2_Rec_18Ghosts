@@ -1,6 +1,4 @@
-using System;
-
-namespace lp2_rec_ghosts.Model
+namespace lp2_rec_ghosts.Model.GameTypes
 {
     /// <summary>
     /// Base struct for positions and translations.

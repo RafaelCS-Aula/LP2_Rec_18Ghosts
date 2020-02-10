@@ -1,32 +1,35 @@
 using lp2_rec_ghosts.Model.BridgeClasses;
 using lp2_rec_ghosts.Model.Ghosts;
+using lp2_rec_ghosts.Model.GameTypes;
+using lp2_rec_ghosts.Model.Board;
 
 namespace lp2_rec_ghosts.Model
 {
     /// <summary>
     /// Main class to control the flow of the game.
     /// </summary>
-    public class GameController
+    public static class GameController
     {
         /// <summary>
         /// List of Players.
         /// </summary>
         /// <value></value>
         private static Player[] Players {get; set;} = new Player[2]; 
-        private Player CurrentPlayer {get; set;}
+        private static Player CurrentPlayer {get; set;}
         public static bool FastMode {get; private set;} = false;
 
+        public static GameBoard GBoard {get; private set;}
 
 
         /// <summary>
         /// Constructor creates the Players and builds the Board. 
         /// </summary>
-        public GameController()
+        public static void SetupGame()
         {
+            GBoard = new GameBoard();
+
             Players[0] = new Player();
             Players[1] = new Player();
-
-            GameBoard.BuildBoard();
 
             RenderInfo.ScreenMessage("Turn fast mode ON?");
             FastMode = InputReceiver.AskBoolSelect();   
@@ -36,7 +39,7 @@ namespace lp2_rec_ghosts.Model
             
         }
 
-        private void StartGame()
+        private static void StartGame()
         {
             Players[0].DoTurn();
             Players[0].DoTurn();
@@ -79,7 +82,7 @@ namespace lp2_rec_ghosts.Model
                     p.AddGhost(ghost);
 
                 ghost.InDungeon = false;
-                GameBoard.DropPlacement = true;
+                GameController.GBoard.DropPlacement = true;
                 p.UseGhost(ghost);
             }
 
@@ -87,7 +90,7 @@ namespace lp2_rec_ghosts.Model
 
         }
 
-        private void EndGame()
+        private static void EndGame()
         {
 
             RenderInfo.ScreenMessage("GAME OVER!");

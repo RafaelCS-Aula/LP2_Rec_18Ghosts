@@ -1,7 +1,8 @@
 using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.BridgeClasses;
+using lp2_rec_ghosts.Model.Enums;
 
-namespace lp2_rec_ghosts.Model
+namespace lp2_rec_ghosts.Model.GameTypes
 {
     public class Player
     {
@@ -233,7 +234,7 @@ namespace lp2_rec_ghosts.Model
 
 
             // Check if tile the ghost is on has any effect on the it
-            GameBoard.ActivateSpecialTile(givenGhost.Position);
+            GameController.GBoard.ActivateSpecialTile(givenGhost.Position);
 
             
             // Ask for Input

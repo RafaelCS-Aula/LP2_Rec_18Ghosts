@@ -1,6 +1,7 @@
 using lp2_rec_ghosts.Model.Interfaces;
+using lp2_rec_ghosts.Model.Enums;
 
-namespace lp2_rec_ghosts.Model
+namespace lp2_rec_ghosts.Model.Board
 {
     /// <summary>
     /// Class representing the mirror tiles on the board.
@@ -15,7 +16,7 @@ namespace lp2_rec_ghosts.Model
         /// </summary>
         public void OnSelectedInteraction()
         {
-            GameBoard.DropPlacement = true;
+            GameController.GBoard.DropPlacement = true;
 
         }
         

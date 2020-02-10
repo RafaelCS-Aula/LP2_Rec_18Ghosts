@@ -1,3 +1,6 @@
+using lp2_rec_ghosts.Model.GameTypes;
+using lp2_rec_ghosts.Model.Enums;
+
 namespace lp2_rec_ghosts.Model.Ghosts
 {
 
@@ -44,7 +47,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
                 new Vector(Position.Y, -Position.X);
 
             Position = newPosition;
-            GameBoard.UpdateGhostOnBoard(this);
+            GameController.GBoard.UpdateGhostOnBoard(this);
 
         }
 

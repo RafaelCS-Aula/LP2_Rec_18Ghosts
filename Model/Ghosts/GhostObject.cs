@@ -1,5 +1,7 @@
 using lp2_rec_ghosts.Model.Interfaces;
-using lp2_rec_ghosts.Model;
+using lp2_rec_ghosts.Model.GameTypes;
+using lp2_rec_ghosts.Model.Enums;
+using lp2_rec_ghosts.Model.Board;
 
 namespace lp2_rec_ghosts.Model.Ghosts
 {
@@ -92,7 +94,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
             // we can check their status like this.
             if(!InDungeon)
                 Position = newPosition;
-            GameBoard.UpdateGhostOnBoard(this);
+            GameController.GBoard.UpdateGhostOnBoard(this);
 
         } 
         

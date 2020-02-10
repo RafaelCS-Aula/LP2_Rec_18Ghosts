@@ -1,6 +1,4 @@
-using System;
-
-namespace lp2_rec_ghosts.Model
+namespace lp2_rec_ghosts.Model.Enums
 {
     /// <summary>
     /// The colors that characterize every element on the board. 
