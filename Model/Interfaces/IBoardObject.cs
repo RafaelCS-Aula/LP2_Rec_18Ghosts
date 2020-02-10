@@ -13,13 +13,13 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// this object's grid position.
         /// </summary>
         /// <value> A Vector with an X and Y components. </value>
-        public Vector Position {get; set;}
+        Vector Position {get; set;}
 
         /// <summary>
         /// The obejct's color, can also be its type such as Mirror or Block.
         /// </summary>
         /// <value> The Colors value, necessary for comaprisons between objects
         ///  </value>
-        public Colors MyColor {get; set;}
+        Colors MyColor {get; set;}
     }
 }

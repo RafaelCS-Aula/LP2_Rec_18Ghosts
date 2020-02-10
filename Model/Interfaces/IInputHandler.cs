@@ -12,7 +12,7 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// </summary>
         /// <param name="x">The wanted X component of the Vector</param>
         /// <param name="y">The wanted Y component of the Vector</param>
-        public void AwaitVectorInput(out float x, out float y);
+        void AwaitVectorInput(out float x, out float y);
 
         /// <summary>
         /// Get a Boolean value from the outside, to be used
@@ -20,7 +20,7 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// </summary>
         /// <returns> A boolean value to be used as input in the model.
         /// </returns>
-        public bool AwaitBoolInput();
+        bool AwaitBoolInput();
 
     }
 }

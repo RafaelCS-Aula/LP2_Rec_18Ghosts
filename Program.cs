@@ -7,6 +7,7 @@ namespace lp2_rec_ghosts
     {
         static void Main(string[] args)
         {
+            Console.Write("Hello world");
             /*Console.Clear();
             GameBoard.InitBoard();
             foreach(var v in GameBoard.Board)

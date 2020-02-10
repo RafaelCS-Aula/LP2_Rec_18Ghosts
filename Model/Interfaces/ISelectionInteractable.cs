@@ -12,6 +12,6 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// Interaction logic for interactions that are triggered by something
         /// other than the me - Interactor pair.
         /// </summary>
-         public void OnSelectedInteraction();
+         void OnSelectedInteraction();
     }
 }

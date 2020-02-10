@@ -40,11 +40,6 @@ namespace lp2_rec_ghosts.Model.GameTypes
         private Vector input;
 
         /// <summary>
-        /// The valid positions the Ghost can be moved to.
-        /// </summary>
-        private Vector[] validGridInputs;
-
-        /// <summary>
         /// All the ghosts in the player's control, divided by color and
         /// whether they are in the dungeon or not.
         /// </summary>
