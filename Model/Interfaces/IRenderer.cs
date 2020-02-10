@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using lp2_rec_ghosts.Model.GameTypes;
+using lp2_rec_ghosts.Model.Ghosts;
+
 namespace lp2_rec_ghosts.Model.Interfaces
 {
     /// <summary>
@@ -11,6 +15,19 @@ namespace lp2_rec_ghosts.Model.Interfaces
         /// </summary>
         /// <param name="message"> Text to display.static </param>
         public void DrawMessage(string message);
+
+        /// <summary>
+        /// Draw the list of Ghosts of the current Player's turn.
+        /// </summary>
+        /// <param name="ghostList"></param>
+        public void DrawGhostList(GhostObject[][] ghostList);
+
+        /// <summary>
+        /// Draw the Board, tiles and ghosts.
+        /// </summary>
+        /// <param name="board"> The game board in the state to be drawn 
+        /// </param>
+        public void DrawBoard(Dictionary<Vector, IBoardObject[]> board);
 
     }
 }
