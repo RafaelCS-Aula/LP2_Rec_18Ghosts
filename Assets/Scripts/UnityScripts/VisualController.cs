@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using lp2_rec_ghosts.Model.BridgeClasses;
 using lp2_rec_ghosts.Model.Interfaces;
 using lp2_rec_ghosts.Model.GameTypes;
 using lp2_rec_ghosts.Model.Ghosts;
+using lp2_rec_ghosts.Model.Enums;
 
 public class VisualController : MonoBehaviour, IRenderer
 {
@@ -21,7 +21,7 @@ public class VisualController : MonoBehaviour, IRenderer
     private GameObject Player2GhostVisuals;
 
     [SerializeField]
-    private Color[] VisualColor = new Color[3];
+    private Color RedColor, BlueColor, YellowColor;
 
     [Tooltip("1 - RED, 2 - BLUE, 3- YELLOW")]
     [SerializeField]
@@ -36,18 +36,98 @@ public class VisualController : MonoBehaviour, IRenderer
     [SerializeField]
     private Text GhostList;
 
+    private List<GameObject> ghostsOnBoard = new List<GameObject>();
+
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
 
         RenderInfo.OutsideRenderer = this;
+
 
     }
 
 
     public void DrawBoard(Dictionary<Vector, IBoardObject[]> board)
     {
+        GhostObject currentGhost;
+        GameObject spawnedGhost;
+        Color spawnedGhostColor;
+        IBoardObject[] tileSpace;
+        GameObject ghostVisuals;
+        Vector3 spawnPoint = new Vector3(0,0,0);
 
+        for(int x = 1; x < 6; x++)
+        {
+            for(int y = 1; y < 6; y++ )
+            {
+                board.TryGetValue(new Vector(x,y), out tileSpace);
+                currentGhost = tileSpace[1] as GhostObject;
+                    // Give it the place to spawn
+                    spawnPoint.x = x;
+                    spawnPoint.y = y;
+
+                // There's a ghost on that place on the board
+                if(currentGhost != null)
+                {
+                    if(currentGhost.Owner.playerNumber == 1)
+                        ghostVisuals = Player1GhostVisuals;
+                    else
+                        ghostVisuals = Player2GhostVisuals;
+
+                    // Spawn him and put him in the scene.
+                    spawnedGhost = Instantiate(
+                        ghostVisuals, 
+                        spawnPoint, 
+                        transform.rotation, 
+                        GhostHolder.transform );
+
+                    // Get the color of the ghost
+                    spawnedGhostColor = 
+                        spawnedGhost.GetComponent<SpriteRenderer>().color;
+
+                    // Apply it to the sprites
+                    switch(currentGhost.MyColor)
+                    {
+                        case(Colors.RED):
+                            spawnedGhostColor = RedColor;
+                            break;
+                        case(Colors.BLUE):
+                            spawnedGhostColor = BlueColor;
+                            break;
+                        case(Colors.YELLOW):
+                            spawnedGhostColor = YellowColor;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    ghostsOnBoard.Add(spawnedGhost);
+
+                }
+                else if(currentGhost == null)
+                {
+                    // There is no ghost there.
+                    
+                    // Check the board to see if there is a ghost sprite there
+                    foreach(GameObject g in ghostsOnBoard)
+                    {
+                         // Get it out of there.
+                        if(spawnPoint == g.transform.position)
+                        {
+
+                        ghostsOnBoard.Remove(g);
+                        Destroy(g);
+
+                        }
+
+                    }
+                }
+                
+            }
+
+
+        }
 
 
     }
