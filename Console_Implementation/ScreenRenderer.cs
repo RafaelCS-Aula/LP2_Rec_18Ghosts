@@ -41,7 +41,32 @@ namespace lp2_rec_ghosts.Console_Implementation
 
 
         }
-        public void DrawBoard(Dictionary<Vector, IBoardObject[]> board){}
+
+
+        public void DrawBoard(Dictionary<Vector, IBoardObject[]> board)
+        {
+
+            char c = ' ';
+            foreach(KeyValuePair<Vector, IBoardObject[]> k in board)
+            {
+
+                GhostObject g = k.Value[1] as GhostObject;
+
+                if(g != null)
+                {
+                    if (g.Owner.playerNumber == 1) 
+                    c = ghostPlayer1Visual;
+                    else if (g.Owner.playerNumber == 2) 
+                    c = ghostPlayer2Visual;                   
+                    Console.SetCursorPosition(k.Key.X, k.Key.Y);
+                    TextColorSwitcher(g.MyColorcolor);
+                    Console.Write(c);
+                }
+            }
+            
+
+
+        }
 
 
         /// <summary>
