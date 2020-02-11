@@ -120,7 +120,7 @@ namespace lp2_rec_ghosts.Model.GameTypes
         {
             int count = 0;
 
-            for(int i = 0; i < myGhosts.GetUpperBound(category); i++)
+            for(int i = 0; i < myGhosts[category].Length; i++)
             {
 
                 if(myGhosts[category][i] != null) count++;

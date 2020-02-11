@@ -90,7 +90,7 @@ namespace lp2_rec_ghosts.Model.Board
             IBoardObject[] gridSpace;
             // Bottom Portal            
             Board.Add(new Vector(3,1), new IBoardObject[3]
-                {new CarpetTile(Colors.BLOCK), null, null});
+                {new CarpetTile(Colors.BLOCK | Colors.BLUE), null, null});
 
             // Corresponding dummy ghost.
             Board.TryGetValue(new Vector(3,0), out gridSpace );
@@ -100,7 +100,7 @@ namespace lp2_rec_ghosts.Model.Board
             
             // Right Portal            
             Board.Add(new Vector(5,3), new IBoardObject[3]
-                {new CarpetTile(Colors.BLOCK), null, null});
+                {new CarpetTile(Colors.BLOCK | Colors.YELLOW), null, null});
 
             // Corresponding dummy ghost.
             Board.TryGetValue(new Vector(6,3), out gridSpace );
@@ -109,7 +109,7 @@ namespace lp2_rec_ghosts.Model.Board
 
             // Top Portal            
             Board.Add(new Vector(3,5), new IBoardObject[3]
-                {new CarpetTile(Colors.BLOCK), null, null});
+                {new CarpetTile(Colors.BLOCK | Colors.RED), null, null});
 
             // Corresponding dummy ghost.
             Board.TryGetValue(new Vector(3,6), out gridSpace );
@@ -172,6 +172,25 @@ namespace lp2_rec_ghosts.Model.Board
                 {new CarpetTile(Colors.BLUE), null, null});
             Board.Add(new Vector(5,1), new IBoardObject[3]
                 {new CarpetTile(Colors.YELLOW), null, null});
+
+
+
+            IBoardObject[] tile;
+            // Update the position properties in the tiles themselves
+            for(int x = 0; x < 7; x++)
+            {
+                for(int y = 0; y < 7; y++)
+                {   
+                    Board.TryGetValue(new Vector(x,y), out tile);
+
+                    tile[0].Position = new Vector(x,y);
+                }
+
+
+            }
+
+
+            RenderInfo.UpdateBoardDraw(Board);
         }
 
         /// <summary>
@@ -274,8 +293,8 @@ namespace lp2_rec_ghosts.Model.Board
             foreach(KeyValuePair<Vector, IBoardObject[]> g in Board)
             {
 
-                if(g.Value[0].MyColor.Equals(colorToMatch) && 
-                    g.Value[1].Equals(null))
+                if(g.Value[0].MyColor == colorToMatch && 
+                    g.Value[1] == null )
                     {
                         yield return g.Key;
 
