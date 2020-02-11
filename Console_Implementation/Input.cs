@@ -5,6 +5,9 @@ using System;
 
 namespace lp2_rec_ghosts.Console_Implementation
 {
+    /// <summary>
+    /// Console App implementation of the Input receiving class for the Model.
+    /// </summary>
     public class Input: IInputHandler
     {
 

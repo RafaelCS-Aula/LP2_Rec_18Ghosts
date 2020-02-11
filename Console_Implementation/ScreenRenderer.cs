@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace lp2_rec_ghosts.Console_Implementation
 {
+    /// <summary>
+    /// Console App implementaion of the Renderer for the Model game's state.
+    /// </summary>
     public class ScreenRenderer: IRenderer
     {
         // Characters to be used for each element of the board.
@@ -23,11 +26,16 @@ namespace lp2_rec_ghosts.Console_Implementation
             // Set the console windows size.
             // Might break on Linux.
             Console.SetWindowSize(140, 30);
+
+            // Make it so the console can output special characters.
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             RenderInfo.OutsideRenderer = this;
         }
 
+        /// <summary>
+        /// Implementation of IRenderer.DrawMessage();
+        /// </summary>
         public void DrawMessage(string msg)
         {
             
@@ -41,6 +49,9 @@ namespace lp2_rec_ghosts.Console_Implementation
 
         }
 
+        /// <summary>
+        /// Implementation of IRenderer.DrawGhostList
+        /// </summary>
         public void DrawGhostList(GhostObject[][] list)
         {
 
@@ -244,11 +255,6 @@ namespace lp2_rec_ghosts.Console_Implementation
             // Tell the players some instructions
             Console.SetCursorPosition(90,0);
             Console.Write("Your Ghosts in the Dungeon:");
-
- 
-            /*Console.SetCursorPosition(70,1);
-            Console.Write("Type 'd' + the number on the left to select them.");
-            */
 
 
             Console.SetCursorPosition(70,2);
