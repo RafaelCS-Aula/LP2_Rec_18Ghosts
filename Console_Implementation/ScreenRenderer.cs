@@ -15,8 +15,15 @@ namespace lp2_rec_ghosts.Console_Implementation
         private char mirrorVisual = 'M';
         private char ghostPlayer1Visual = '@';
         private char ghostPlayer2Visual = '&';
-        private char[] portalVisuals = {'←','→','↑','↓'};
+        private char[] portalVisuals = {'↑','→','↓','←'};
 
+
+        public ScreenRenderer()
+        {
+            // Set the console windows size.
+            // Might break on Linux.
+            Console.SetWindowSize(140, 30);
+        }
 
         public void DrawMessage(string msg)
         {
@@ -42,15 +49,26 @@ namespace lp2_rec_ghosts.Console_Implementation
 
         }
 
-
+    /// <summary>
+    /// Updates the board tiles and ghosts on screen.
+    /// </summary>
+    /// <param name="board"></param>
         public void DrawBoard(Dictionary<Vector, IBoardObject[]> board)
         {
+            DrawNumbers();
 
+            GhostObject g;
+            IBoardObject t;
+            
             char c = ' ';
             foreach(KeyValuePair<Vector, IBoardObject[]> k in board)
             {
 
-                GhostObject g = k.Value[1] as GhostObject;
+                // The board
+                t = k.Value[0];
+
+                // Draw the ghosts
+                g = k.Value[1] as GhostObject;
 
                 if(g != null)
                 {
@@ -58,10 +76,26 @@ namespace lp2_rec_ghosts.Console_Implementation
                     c = ghostPlayer1Visual;
                     else if (g.Owner.playerNumber == 2) 
                     c = ghostPlayer2Visual;                   
-                    Console.SetCursorPosition(k.Key.X, k.Key.Y);
-                    TextColorSwitcher(g.MyColorcolor);
-                    Console.Write(c);
                 }
+                else
+                {
+                    // If it is at the edges don't draw anything as we've
+                    // already drawn the numbers
+                    if(t.Position.X == 0 || t.Position.Y == 0)
+                        continue;
+                    if(t.MyColor == Colors.MIRROR)
+                        c = mirrorVisual;
+                    else if(t.MyColor == Colors.BLOCK)
+                    // MAKE PORTALS POINT THE RIGHT WAY
+                        c = portalVisuals[0];
+                    else
+                        c = tileVisual;
+                    
+                }
+
+                Console.SetCursorPosition(k.Key.X, k.Key.Y);
+                TextColorSwitcher(g.MyColor);
+                Console.Write(c);
             }
             
 
@@ -168,12 +202,12 @@ namespace lp2_rec_ghosts.Console_Implementation
         }
 
         /// <summary>
-        /// Método para apresentar a lista da caverna dos fantasmas.
+        /// Draws a list of all the ghosts in the dungeon.
         /// </summary>
-        /// <param name="dung"> Acede a classe Dungeon. </param>
+        /// <param name="dung"> The array of ghosts in the dungeon </param>
         public void DrawDungeonGhostList(GhostObject[] dung)
         {
-            // Variável.
+            
             char c = ' ';
             // Coloca a cor da consola a branco.
             Console.ForegroundColor = ConsoleColor.White;
@@ -207,7 +241,7 @@ namespace lp2_rec_ghosts.Console_Implementation
                 Console.Write($"[{i}] - {c}.\n");
             }
 
-            // Faz um tracejado a branco na coluna 70.
+            // Make a white line at line 70.
             Console.CursorLeft = 70;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("---------------------------------------------" +
