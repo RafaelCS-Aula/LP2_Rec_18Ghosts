@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
-public class InputController : MonoBehaviour, IInputHandler
+public class InputController : MonoBehaviour, IInputHandler, IModelConnector
 {
 
     [SerializeField]
@@ -17,7 +17,7 @@ public class InputController : MonoBehaviour, IInputHandler
     private string[] splitInput;
 
    
-    void Start()
+    public void Initialize()
     {
         askingForIn = false;
 

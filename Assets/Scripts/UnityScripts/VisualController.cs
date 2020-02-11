@@ -7,7 +7,7 @@ using lp2_rec_ghosts.Model.GameTypes;
 using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.Enums;
 
-public class VisualController : MonoBehaviour, IRenderer
+public class VisualController : MonoBehaviour, IRenderer, IModelConnector
 {
 
     [SerializeField]
@@ -38,11 +38,18 @@ public class VisualController : MonoBehaviour, IRenderer
 
     private List<GameObject> ghostsOnBoard = new List<GameObject>();
 
+
+    public void Initialize()
+    {
+
+        RenderInfo.OutsideRenderer = this;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
 
-        RenderInfo.OutsideRenderer = this;
+        
 
 
     }
@@ -136,7 +143,7 @@ public class VisualController : MonoBehaviour, IRenderer
     {
         // Dungeon List;
         string dungeonText = "";
-        for(int i = 0; i < ghostList.GetLength(3); i++)
+        for(int i = 0; i < ghostList[3].Length; i++)
         {
             if(ghostList[3][i] != null)
                 dungeonText += $"[{i}] {ghostList[3][i]}\n";
@@ -146,11 +153,11 @@ public class VisualController : MonoBehaviour, IRenderer
         }
         DungeonList.text = dungeonText;
 
-
+        // Player inventory list
         string listText = "";
         for(int i = 0; i < 3; i++)
         {
-            for(int x = 0; x < ghostList.GetLength(i); x++ )
+            for(int x = 0; x < ghostList[i].Length; x++ )
             {
                 if(ghostList[i][x] != null)
                     listText += $"[{i},{x}] {ghostList[i][x]}\n";
