@@ -23,6 +23,7 @@ namespace lp2_rec_ghosts.Console_Implementation
             // Set the console windows size.
             // Might break on Linux.
             Console.SetWindowSize(140, 30);
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             RenderInfo.OutsideRenderer = this;
         }
@@ -35,7 +36,7 @@ namespace lp2_rec_ghosts.Console_Implementation
             Console.WriteLine("     ");
             Console.SetCursorPosition(0,25);
             Console.Write(
-                $"Player{GameController.CurrentPlayer.playerNumber}: " + 
+                $"Player{GameController.CurrentPlayer?.playerNumber}: " + 
                   msg +"\n");
 
         }
@@ -51,14 +52,15 @@ namespace lp2_rec_ghosts.Console_Implementation
 
         }
 
-    /// <summary>
-    /// Updates the board tiles and ghosts on screen.
-    /// </summary>
-    /// <param name="board"></param>
+        /// <summary>
+        /// Updates the board tiles and ghosts on screen.
+        /// </summary>
+        /// <param name="board"></param>
         public void DrawBoard(Dictionary<Vector, IBoardObject[]> board)
         {
             DrawNumbers();
 
+            
             GhostObject g;
             IBoardObject t;
             
@@ -75,28 +77,44 @@ namespace lp2_rec_ghosts.Console_Implementation
                 if(g != null)
                 {
                     if (g.Owner.playerNumber == 1) 
-                    c = ghostPlayer1Visual;
+                        c = ghostPlayer1Visual;
                     else if (g.Owner.playerNumber == 2) 
-                    c = ghostPlayer2Visual;                   
+                        c = ghostPlayer2Visual;    
+
+                    TextColorSwitcher(g.MyColor);               
                 }
-                else
+                else // If there's no ghost on the tile just draw the tile.
                 {
                     // If it is at the edges don't draw anything as we've
                     // already drawn the numbers
                     if(t.Position.X == 0 || t.Position.Y == 0)
                         continue;
-                    if(t.MyColor == Colors.MIRROR)
+                    if (t.MyColor == Colors.MIRROR)
                         c = mirrorVisual;
-                    else if(t.MyColor == Colors.BLOCK)
-                    // MAKE PORTALS POINT THE RIGHT WAY
-                        c = portalVisuals[0];
+                    else if (t.MyColor.HasFlag(Colors.BLOCK))
+                    {
+                        if (t.MyColor == Colors.BLOCK)
+                        {
+                            c = ' ';
+                        }
+                        else
+                            //TODO: MAKE PORTALS POINT THE RIGHT WAY
+                            c = portalVisuals[0];
+                    }
+                        
                     else
                         c = tileVisual;
+
+                    TextColorSwitcher(t.MyColor);
                     
                 }
 
-                Console.SetCursorPosition(k.Key.X, k.Key.Y);
-                TextColorSwitcher(g.MyColor);
+                // Console windows' 0,0 is at the top left instead of bottom.
+                // 3 is the middle row, we use it as the mirror axis.
+                int mirrorY = 3 - (k.Key.Y - 3);
+
+
+                Console.SetCursorPosition(k.Key.X, mirrorY);
                 Console.Write(c);
             }
             
@@ -114,10 +132,13 @@ namespace lp2_rec_ghosts.Console_Implementation
         {
             Console.Clear();
 
+            Console.SetCursorPosition(0, 6);
             // Row
-            Console.WriteLine(" 01234");
+            Console.WriteLine("012345");
+
+            Console.SetCursorPosition(0, 0);
             // Column
-            Console.Write("0\n1\n2\n3\n4");
+            Console.Write("0\n5\n4\n3\n2\n1");
         }
 
         /// <summary>
@@ -128,26 +149,15 @@ namespace lp2_rec_ghosts.Console_Implementation
         ///</remarks>  
         private void TextColorSwitcher(Colors c)
         {
-   
-       
-            switch(c)
-            {
-                case Colors.BLUE:
+            if(c.HasFlag(Colors.BLUE))
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                break;
-
-                case Colors.RED:
+            else if (c.HasFlag(Colors.RED))
                 Console.ForegroundColor = ConsoleColor.Red;
-                break;
-
-                case Colors.YELLOW:
+            else if (c.HasFlag(Colors.YELLOW))
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                break;
-
-                default:
-                 Console.ForegroundColor = ConsoleColor.White;
-                 break;
-            }        
+            else
+                Console.ForegroundColor = ConsoleColor.White;
+ 
         }
 
         /// <summary>
@@ -183,18 +193,31 @@ namespace lp2_rec_ghosts.Console_Implementation
             if (currentPlayer.playerNumber == 1) c = ghostPlayer1Visual;
             else if (currentPlayer.playerNumber == 2) c = ghostPlayer2Visual;
 
-            // Conta quantos fantasmas o jogador tem.
+            
             for(int x = 0; x < 3; x++)
             {
                 for (int i = 0; i < ghosts[x].Length; i++)
                 {
-                Console.CursorLeft = 25;
-                g = ghosts[x][i];
-                TextColorSwitcher(g.MyColor);
-                if(g != null)
-                    Console.Write(
-                        $"[{x},{i}] - {c}, at ({g.Position.X},{g.Position.Y})"
-                        + "\n");
+                    Console.CursorLeft = 25;
+                    g = ghosts[x][i];
+                
+                    if(g != null)
+                    {
+                        TextColorSwitcher(g.MyColor);
+                        Console.Write(
+                            $"[{x},{i}] - {c}, at ({g.Position.X}," +
+                            $"{g.Position.Y}) \n");
+                    }
+                    else
+                    {
+                        
+                        TextColorSwitcher(Colors.BLOCK);
+                        Console.Write($"[{x},{i}] -----");
+
+                    }
+                        
+                
+                    
 
                 }
 
@@ -236,12 +259,24 @@ namespace lp2_rec_ghosts.Console_Implementation
             for (int i = 0; i < dung.Length; i++)
             {
                 g = dung[i];
-                if (g.Owner.playerNumber == 1) c = ghostPlayer1Visual;
-                else if (g.Owner.playerNumber == 2) c = ghostPlayer2Visual;
-                TextColorSwitcher(g.MyColor);
 
-                Console.CursorLeft = 90;
-                Console.Write($"[4,{i}] - {c}.\n");
+                if(g != null)
+                {
+                    if (g.Owner.playerNumber == 1) c = ghostPlayer1Visual;
+                    else if (g.Owner.playerNumber == 2) c = ghostPlayer2Visual;
+                    TextColorSwitcher(g.MyColor);
+                    Console.CursorLeft = 90;
+                    Console.Write($"[4,{i}] - {c}.\n");                    
+                }
+                else 
+                {
+                    Console.CursorLeft = 90;
+                    Console.Write($"[4,{i}] ------ \n");                    
+
+                }
+
+
+
             }
 
             // Make a white line at line 70.
