@@ -10,6 +10,14 @@ namespace lp2_rec_ghosts.Console_Implementation
 
         private string inputedText;
 
+        public Input()
+        {
+
+            InputReceiver.InputSender = this;
+
+        }
+
+
         /// <summary>
         /// Awaits for and parses the users input to fit a vector format
         /// </summary>
@@ -62,7 +70,9 @@ namespace lp2_rec_ghosts.Console_Implementation
                 return false;
             }
 
-
+        /// <summary>
+        /// Reads the player's input and registers it.
+        /// </summary>
         private void WaitInput() => inputedText = Console.ReadLine();
 
     }

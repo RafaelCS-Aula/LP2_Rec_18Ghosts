@@ -23,6 +23,8 @@ namespace lp2_rec_ghosts.Console_Implementation
             // Set the console windows size.
             // Might break on Linux.
             Console.SetWindowSize(140, 30);
+
+            RenderInfo.OutsideRenderer = this;
         }
 
         public void DrawMessage(string msg)
@@ -191,7 +193,8 @@ namespace lp2_rec_ghosts.Console_Implementation
                 TextColorSwitcher(g.MyColor);
                 if(g != null)
                     Console.Write(
-                        $"[{i}] - {c}, at ({g.Position.X},{g.Position.Y})\n");
+                        $"[{x},{i}] - {c}, at ({g.Position.X},{g.Position.Y})"
+                        + "\n");
 
                 }
 
@@ -220,8 +223,9 @@ namespace lp2_rec_ghosts.Console_Implementation
             Console.Write("Your Ghosts in the Dungeon:");
 
  
-            Console.SetCursorPosition(70,1);
+            /*Console.SetCursorPosition(70,1);
             Console.Write("Type 'd' + the number on the left to select them.");
+            */
 
 
             Console.SetCursorPosition(70,2);
@@ -237,7 +241,7 @@ namespace lp2_rec_ghosts.Console_Implementation
                 TextColorSwitcher(g.MyColor);
 
                 Console.CursorLeft = 90;
-                Console.Write($"[{i}] - {c}.\n");
+                Console.Write($"[4,{i}] - {c}.\n");
             }
 
             // Make a white line at line 70.
