@@ -51,7 +51,7 @@ sem qualquer implementação.
 
 * Pela altura de entrega deste documento, tentar correr o jogo no editor do
   _Unity_
-  cause com que a janela congele e o seu consumo de memória suba constantemente.
+  causa com que a janela congele e o seu consumo de memória suba constantemente.
 * O congelar da janela do editor verifica-se sempre, no entanto se a janela não
   estiver aberta o consumo de memória não é afetado.
 * Correndo o jogo através do _debugger_ do _Visual Studio_ o jogo corre
