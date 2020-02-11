@@ -39,7 +39,7 @@ namespace lp2_rec_ghosts.Model.Ghosts
         ///  The Player currently capable of controlling this Ghost.
         /// </summary>
         /// <value> A Player object </value>
-        protected Player Owner {get; set;}
+        public Player Owner {get; protected set;}
 
         public bool InDungeon {get; set;} = false;
 

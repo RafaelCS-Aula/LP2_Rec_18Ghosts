@@ -6,6 +6,13 @@ namespace lp2_rec_ghosts.Model.GameTypes
 {
     public class Player
     {
+
+        /// <summary>
+        /// Number to identify this instance of Player.
+        /// </summary>
+        public int playerNumber {get; set;}
+
+
         // All the Scores that are kept updated to evaluate the win condition.
 
         /// <summary>
