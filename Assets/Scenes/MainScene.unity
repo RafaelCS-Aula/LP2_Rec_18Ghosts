@@ -4860,6 +4860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657da57ba9bb8db42a18e598d77da1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GhostHolder: {fileID: 0}
   Player1GhostVisuals: {fileID: 861103165522088881, guid: 2700c53f3d7377c4eb28caa6e4bf5f11,
     type: 3}
   Player2GhostVisuals: {fileID: 6740890729949279139, guid: 2018a543f282d154ea908d2a0bb8ef5a,
@@ -4872,6 +4873,9 @@ MonoBehaviour:
   - {fileID: 8454281525440238039}
   - {fileID: 766121548}
   - {fileID: 2050841195}
+  MessagePrompt: {fileID: 2002883783}
+  DungeonList: {fileID: 1258059399}
+  GhostList: {fileID: 1090088986}
 --- !u!4 &1766057750
 Transform:
   m_ObjectHideFlags: 0
