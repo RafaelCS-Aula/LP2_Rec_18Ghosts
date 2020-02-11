@@ -39,6 +39,8 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
 
             Players[0] = new Player();
             Players[1] = new Player();
+            Players[0].playerNumber = 1;
+            Players[1].playerNumber = 2;
 
             RenderInfo.ScreenMessage("Turn fast mode ON?");
             FastMode = InputReceiver.AskBoolSelect();   
