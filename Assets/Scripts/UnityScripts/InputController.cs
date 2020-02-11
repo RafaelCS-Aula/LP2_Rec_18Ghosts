@@ -47,7 +47,7 @@ public class InputController : MonoBehaviour, IInputHandler, IModelConnector
         askingForIn = true;
 
         // Wait
-        //StartCoroutine(WaitForInput());
+        StartCoroutine(WaitForInput());
 
         // The expected string is in the format "...,..." but the splitter
         // uses more than ',' just in case.
