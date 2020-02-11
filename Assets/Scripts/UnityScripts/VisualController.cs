@@ -7,54 +7,80 @@ using lp2_rec_ghosts.Model.GameTypes;
 using lp2_rec_ghosts.Model.Ghosts;
 using lp2_rec_ghosts.Model.Enums;
 
+/// <summary>
+/// Unity script to implement the visuals of the Model.
+/// </summary>
 public class VisualController : MonoBehaviour, IRenderer, IModelConnector
 {
-
+    /// <summary>
+    /// Empty GameObject in the scene all Ghosts will be parented to.
+    /// </summary>
     [SerializeField]
     private GameObject GhostHolder;
 
+    /// <summary>
+    /// Prefab with the visuals for Ghosts
+    /// </summary>
     [SerializeField]
     private GameObject Player1GhostVisuals;
 
-
+    /// <summary>
+    /// Prefab with the visuals for Ghosts
+    /// </summary>
     [SerializeField]
     private GameObject Player2GhostVisuals;
 
+    /// <summary>
+    /// The colors applied to the Ghost sprites when they are spawned in.
+    /// </summary>
     [SerializeField]
     private Color RedColor, BlueColor, YellowColor;
 
+    /// <summary>
+    /// GameObjects in the scene representing the Portals.
+    /// </summary>
     [Tooltip("1 - RED, 2 - BLUE, 3- YELLOW")]
     [SerializeField]
     private GameObject[] Portals;
 
+    /// <summary>
+    /// UI Element in the scene for the text prompts shown to the user.
+    /// </summary>
     [SerializeField]
     private Text MessagePrompt;
 
+    /// <summary>
+    /// UI Element in the scene for the Ghosts in Dungeon list shown to the user.
+    /// </summary>
     [SerializeField]
     private Text DungeonList;
 
+    /// <summary>
+    /// UI Element in the scene for the Ghosts list shown to the user.
+    /// </summary>
     [SerializeField]
     private Text GhostList;
 
+    /// <summary>
+    /// Ghosts that have been placed on the board.
+    /// </summary>
     private List<GameObject> ghostsOnBoard = new List<GameObject>();
 
 
+    /// <summary>
+    /// Implementation of IModelConnector.Initialize()
+    /// </summary>
     public void Initialize()
     {
 
         RenderInfo.OutsideRenderer = this;
 
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-        
-
-
-    }
-
-
+    /// <summary>
+    /// Implementation of IRenderer.DrawBoard();
+    /// </summary>
+    /// <param name="board"></param>
     public void DrawBoard(Dictionary<Vector, IBoardObject[]> board)
     {
         GhostObject currentGhost;
@@ -139,6 +165,10 @@ public class VisualController : MonoBehaviour, IRenderer, IModelConnector
 
     }
 
+    /// <summary>
+    /// Implementation of IRenderer.DrawGhostList()
+    /// </summary>
+    /// <param name="ghostList"></param>
     public void DrawGhostList(GhostObject[][] ghostList)
     {
         // Dungeon List;
@@ -171,6 +201,10 @@ public class VisualController : MonoBehaviour, IRenderer, IModelConnector
 
     }
 
+    /// <summary>
+    /// Implementation of IRenderer.DrawMessage()
+    /// </summary>
+    /// <param name="message"></param>
     public void DrawMessage(string message)
     {
         MessagePrompt.text = message;

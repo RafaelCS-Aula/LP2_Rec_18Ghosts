@@ -5,9 +5,15 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
+/// <summary>
+/// Unity script to implement the Input reception of the Model.
+/// </summary>
 public class InputController : MonoBehaviour, IInputHandler, IModelConnector
 {
-
+    /// <summary>
+    /// UI Element in the scene that will receive the player's input trough
+    /// a textbox.
+    /// </summary>
     [SerializeField]
     private InputField inputField; 
 
@@ -19,6 +25,7 @@ public class InputController : MonoBehaviour, IInputHandler, IModelConnector
    
     public void Initialize()
     {
+        // Asking for input
         askingForIn = false;
 
         // Tell the Model classes this is the class in charge of Input.
@@ -29,7 +36,9 @@ public class InputController : MonoBehaviour, IInputHandler, IModelConnector
     }
 
 
-
+    /// <summary>
+    /// Implementation of IInputHandler.AwaitVectorInput()
+    /// </summary>
     public void AwaitVectorInput(out float x, out float y)
     {   
         ActivateField:
@@ -38,7 +47,7 @@ public class InputController : MonoBehaviour, IInputHandler, IModelConnector
         askingForIn = true;
 
         // Wait
-        StartCoroutine(WaitForInput());
+        //StartCoroutine(WaitForInput());
 
         // The expected string is in the format "...,..." but the splitter
         // uses more than ',' just in case.
@@ -58,10 +67,9 @@ public class InputController : MonoBehaviour, IInputHandler, IModelConnector
     }
 
     /// <summary>
-    /// Wait for input and return it as True/False.
-    /// By default it returns false.
+    /// Implementation of IInhputhandler.AwaitBoolInput()
     /// </summary>
-    /// <returns> The user's input as True or False. </returns>
+    /// <returns> The user's input as True or False. False by default.</returns>
     public bool AwaitBoolInput()
     {
         // Activate the field to start accepting input
@@ -69,7 +77,7 @@ public class InputController : MonoBehaviour, IInputHandler, IModelConnector
         askingForIn = true;
 
         // Wait
-        StartCoroutine(WaitForInput());
+        //StartCoroutine(WaitForInput());
 
         if(inputedText.ToUpper() == "YES" ||
            inputedText.ToUpper() == "TRUE"||
