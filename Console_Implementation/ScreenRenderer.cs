@@ -153,32 +153,31 @@ namespace lp2_rec_ghosts.Console_Implementation
         /// </summary>
         /// <param name="currentPlayer">  Variável do jogador no momento.
         /// </param>
+        ///<remarks> Taken from 'Linguagens de Programação I' 1st project.
+        ///</remarks>
         private void DrawPlayerGhostList(Player currentPlayer,
              GhostObject[][] ghosts)
         {
-            // Variável.
+            
             char c = ' ';
-            // Cor da consola.
+            
             Console.ForegroundColor = ConsoleColor.White;
-            // Acede a classe Ghost.
+            
             GhostObject g;
 
-            // Na posição (30,0) da janela da consola vai ser escrito 
-            // "Your Ghosts:".
+
             Console.SetCursorPosition(30,0);
             Console.Write("Your Ghosts:");
 
-            // Na posição (15,1) da janela da consola vai ser escrito 
-            // "Type the number on the left to select them.".
+   
             Console.SetCursorPosition(15,1);
             Console.Write("Type the number on the left to select them.");
 
-            // Na posição (15,2) da janela da consola vai ser escrito 
-            // "Then type in grid coordinates to place them.\n".
+     
             Console.SetCursorPosition(15,2);
             Console.Write("Then type in grid coordinates to place them.\n");
             
-            // Modifica os visuais dos fantsmas dos jgoadores.
+            // Render each ghost according to it's owner.
             if (currentPlayer.playerNumber == 1) c = ghostPlayer1Visual;
             else if (currentPlayer.playerNumber == 2) c = ghostPlayer2Visual;
 
@@ -205,31 +204,31 @@ namespace lp2_rec_ghosts.Console_Implementation
         /// Draws a list of all the ghosts in the dungeon.
         /// </summary>
         /// <param name="dung"> The array of ghosts in the dungeon </param>
+        ///<remarks> Taken from 'Linguagens de Programação I' 1st project.
+        ///</remarks>
         public void DrawDungeonGhostList(GhostObject[] dung)
         {
             
             char c = ' ';
-            // Coloca a cor da consola a branco.
+            
             Console.ForegroundColor = ConsoleColor.White;
-            // Acede a classe Ghost.
+           
             GhostObject g;
             
-            // Na posição (90, 0) é escrito "Your Ghosts:".
+            // Tell the players some instructions
             Console.SetCursorPosition(90,0);
             Console.Write("Your Ghosts in the Dungeon:");
 
-            // Na posição (70, 1) é escrito "Type 'd' + the number on the 
-            // left to select them.".
+ 
             Console.SetCursorPosition(70,1);
             Console.Write("Type 'd' + the number on the left to select them.");
 
-            // Na posição (70, 2) é escrito "Selecting a ghost in the 
-            // Dungeon will give the other player.\n" .
+
             Console.SetCursorPosition(70,2);
             Console.Write("Selecting a ghost in the Dungeon will give" + 
              "it to the other player.\n");
 
-            // Apresenta os fantasmas de cada jogador na caverna.
+            // Shows all the ghosts in the dungeon
             for (int i = 0; i < dung.Length; i++)
             {
                 g = dung[i];
