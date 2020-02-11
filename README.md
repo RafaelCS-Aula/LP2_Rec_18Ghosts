@@ -45,9 +45,12 @@ sem qualquer implementação.
 
 ## UML
 
+![18GhostsUML.png](18GhostsUML.png)
+
 ## Referências
 
-* O código que alterna a vez dos jogadores no `GameController` foi copiado do
-  projeto de Linguagens de Programação I do ano anterior desenvolvido por
-  mim, Inácio Amerio e Diogo Henriques.
-* Para consulta foram utilizados os _sites DotNetPerls, StackOverFlow_ e a _.NET API_. 
+* O código que alterna a vez dos jogadores no `GameController`, tal como
+  a maioria do código em `ScreenRenderer` foi copiado do projeto de Linguagens
+  de Programação I do ano anterior desenvolvido por mim, Inácio Amerio e Diogo 
+  Henriques.
+* Para consulta foram utilizados os _sites DotNetPerls, StackOverFlow_ e a _.NET API_.
