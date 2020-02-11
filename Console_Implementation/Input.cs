@@ -25,7 +25,8 @@ namespace lp2_rec_ghosts.Console_Implementation
             // The expected string is in the format "...,..." but the splitter
             // uses more than ',' just in case.
             splitInput = inputedText.Split(
-                new char[]{',','.',' '}, StringSplitOptions.RemoveEmptyEntries);
+                new char[]{',','.',' ','-'},
+                 StringSplitOptions.RemoveEmptyEntries);
 
             // If the split didn't result in 2 strings to be parsed then it's
             // already invalid
@@ -39,8 +40,27 @@ namespace lp2_rec_ghosts.Console_Implementation
 
 
         }           
+        /// <summary>
+        /// Wait for input and return it as True/False.
+        /// By default it returns false.
+        /// </summary>
+        /// <returns> The user's input as True or False. </returns>
+        public bool AwaitBoolInput()
+        {
 
-        
+            WaitInput();
+
+            if(inputedText.ToUpper() == "YES" ||
+                inputedText.ToUpper() == "TRUE"||
+                inputedText.ToUpper() == "Y" )
+            {
+
+                return true;
+
+            }
+            else 
+                return false;
+            }
 
 
         private void WaitInput() => inputedText = Console.ReadLine();
