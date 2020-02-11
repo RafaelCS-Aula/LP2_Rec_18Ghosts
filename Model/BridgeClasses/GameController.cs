@@ -16,9 +16,9 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
         private static Player[] Players {get; set;} = new Player[2]; 
 
         /// <summary>
-        /// Player whose turn is up.
+        /// Player who's turn is up.
         /// </summary>
-        private static Player CurrentPlayer {get; set;}
+        public static Player CurrentPlayer {get; private set;}
 
         /// <summary>
         /// What the win condition is.
@@ -36,7 +36,7 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
         public static void SetupGame()
         {
             GBoard = new GameBoard();
-
+            GBoard.DropPlacement = true;
             Players[0] = new Player();
             Players[1] = new Player();
             Players[0].playerNumber = 1;
