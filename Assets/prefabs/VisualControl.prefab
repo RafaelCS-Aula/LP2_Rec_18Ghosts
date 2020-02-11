@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3012794148453825486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3012794148453825484}
+  - component: {fileID: 3012794148453825487}
+  m_Layer: 0
+  m_Name: VisualControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3012794148453825484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012794148453825486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.898543, y: 2.1620843, z: -62.61133}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3012794148453825487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012794148453825486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657da57ba9bb8db42a18e598d77da1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GhostHolder: {fileID: 0}
+  Player1GhostVisuals: {fileID: 861103165522088881, guid: 2700c53f3d7377c4eb28caa6e4bf5f11,
+    type: 3}
+  Player2GhostVisuals: {fileID: 6740890729949279139, guid: 2018a543f282d154ea908d2a0bb8ef5a,
+    type: 3}
+  RedColor: {r: 0.9433962, g: 0, b: 0, a: 0}
+  BlueColor: {r: 0.013616921, g: 0.8502419, b: 0.9622642, a: 0}
+  YellowColor: {r: 1, g: 0.82227814, b: 0.2783019, a: 0}
+  Portals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  MessagePrompt: {fileID: 0}
+  DungeonList: {fileID: 0}
+  GhostList: {fileID: 0}

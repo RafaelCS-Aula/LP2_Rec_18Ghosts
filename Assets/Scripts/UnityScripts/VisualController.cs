@@ -139,9 +139,9 @@ public class VisualController : MonoBehaviour, IRenderer
         for(int i = 0; i < ghostList.GetLength(3); i++)
         {
             if(ghostList[3][i] != null)
-                dungeonText += $"[{i}] {ghostList[3][i]}";
+                dungeonText += $"[{i}] {ghostList[3][i]}\n";
             else
-                dungeonText += $"[{i}] ---- ";
+                dungeonText += $"[{i}] ---- \n";
 
         }
         DungeonList.text = dungeonText;
@@ -153,9 +153,9 @@ public class VisualController : MonoBehaviour, IRenderer
             for(int x = 0; x < ghostList.GetLength(i); x++ )
             {
                 if(ghostList[i][x] != null)
-                    listText += $"[{i},{x}] {ghostList[i][x]}";
+                    listText += $"[{i},{x}] {ghostList[i][x]}\n";
                 else    
-                    listText += $"[{i},{x}] ---- ";
+                    listText += $"[{i},{x}] ---- \n";
             }
 
 
