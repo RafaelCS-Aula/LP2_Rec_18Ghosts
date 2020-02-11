@@ -55,7 +55,9 @@ namespace lp2_rec_ghosts.Model.BridgeClasses
         /// </summary>
         private static void StartGame()
         {
+            CurrentPlayer = Players[0];
             
+
             Players[0].DoTurn();
             Players[0].DoTurn();
             for(int i = 1; i < 1666; i++)
