@@ -42,6 +42,21 @@ sem qualquer implementação.
   certas _interfaces_. Uma implementação tem de simplesmente fornecer classes
   que implementem essas _interfaces_ e comunique com as `BridgeClasses` e o 
   Modelo pode comunicar de volta sem problemas.
+* Os Portais foram implementados como fantasmas "falsos" com a sua própria 
+  lógica de combate, isto permitiu que não tivesse de haver código extra só
+  para os Portais e pode-se utilizar os sistemas que os fantasmas já usavam
+  como a luta e o movimento.
+
+### Nota com a Implementação Unity
+
+* Pela altura de entrega deste documento, tentar correr o jogo no editor do
+  _Unity_
+  cause com que a janela congele e o seu consumo de memória suba constantemente.
+* O congelar da janela do editor verifica-se sempre, no entanto se a janela não
+  estiver aberta o consumo de memória não é afetado.
+* Correndo o jogo através do _debugger_ do _Visual Studio_ o jogo corre
+  normalmente até ao ponto em que é necessário _input_ do jogador, o que é
+  impossível de fornecer pois não há interface para tal.
 
 ## UML
 
